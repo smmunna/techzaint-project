@@ -1,0 +1,35 @@
+.react-tel-input .form-control {
+  position: relative;
+  border-radius: 0%;
+  font-size: 15px;
+  letter-spacing: 0.01rem;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-left: 50px;
+  margin-left: 0;
+  /* background: #FFFFFF; */
+  /* border: 1px solid #201f1f; */
+  line-height: 25px;
+  height: 35px;
+  width: 400px;
+  outline: none;
+  padding-top: 24px;
+  padding-bottom: 21px;
+  color: black;
+}
+
+@media screen and (min-width: 426px) and (max-width: 767px) {
+  .react-tel-input .form-control {
+    width: 380px;
+  }
+}
+@media screen and (min-width: 375px) and (max-width: 425px) {
+  .react-tel-input .form-control {
+    width: 280px;
+  }
+}
+@media screen and (max-width: 374px) {
+  .react-tel-input .form-control {
+    width: 200px;
+  }
+}

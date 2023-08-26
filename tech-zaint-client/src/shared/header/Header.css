@@ -1,0 +1,45 @@
+/* Darkmode and light mode controlling start */
+.light {
+  background-color: rgb(249, 251, 252);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.185);
+  transition: all 0.5s ease-in-out;
+}
+.dark {
+  background-color: rgba(5, 6, 5, 0.895);
+  color: white;
+  transition: all 0.5s ease-in-out;
+}
+/* Darkmode and light mode controlling start */
+
+ul li a:hover {
+  background-color: rgb(249, 251, 252) !important;
+  background-color: rgb(234, 237, 237) !important;
+  border-radius: 0%;
+  border: 1px solid black;
+  margin-left: 10px;
+}
+ul li a:focus {
+  color: black !important;
+  background-color: rgb(249, 251, 252) !important;
+  border: 1px solid black;
+  border-radius: 0%;
+  background-color: rgb(234, 237, 237) !important;
+}
+
+/* Responsive at Media Screen */
+@media screen and (max-width: 576px) {
+  ul li {
+    margin-bottom: 14px;
+  }
+  ul li a:hover {
+    padding: 12px;
+  }
+  ul li a:focus {
+    padding: 12px;
+  }
+}
+
+
+a.absolute.text-2xl.font-serif.font-bold {
+  margin-left: 96px;
+}
