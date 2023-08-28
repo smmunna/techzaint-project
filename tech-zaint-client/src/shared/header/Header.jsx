@@ -161,19 +161,19 @@ const Header = () => {
                 } rounded-box w-52`}
               >
                 <li>
-                  <a className="justify-between">
+                  <Link to="#" className="justify-between">
                     Profile
                     <span className="badge">New</span>
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a>Settings</a>
+                  <Link to="#">Settings</Link>
                 </li>
                 <li>
-                  <a href="/login">Login</a>
+                  <Link to="/login">Login</Link>
                 </li>
                 <li>
-                  <a>Logout</a>
+                  <Link to="#">Logout</Link>
                 </li>
               </ul>
             </div>
