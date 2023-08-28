@@ -20,7 +20,7 @@ const AboutUs = () => {
             Backed by a 3-Year Legacy`}
         des={`Imagine an assembly of exceptional engineers handpicked from across
             the nation, uniting their expertise under one banner – that's us!
-            With a remarkable 15-year journey, we embody a fusion of seasoned
+            With a remarkable 3-year journey, we embody a fusion of seasoned
             experience and a fervent commitment to delivering the finest and
             uncomplicated business solutions. TechZaint doesn't merely lean on
             years of expertise, we embrace the dynamic power of youthful

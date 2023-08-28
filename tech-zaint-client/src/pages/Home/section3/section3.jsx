@@ -1,5 +1,9 @@
 import im1 from "../../../assets/icons/webdesign.png";
 import im2 from "../../../assets/icons/WebApp.png";
+import im3 from "../../../assets/icons/mern.png";
+import im4 from "../../../assets/icons/php.png";
+import im5 from "../../../assets/icons/graphics.png";
+import im6 from "../../../assets/icons/ai.png";
 import { useContext } from "react";
 import { darkContext } from "../../../context/darkmode/DarkContext";
 import HomeTitle from "../../../components/HomeTitle/HomeTitle";
@@ -31,27 +35,27 @@ const Section3 = () => {
                 stack, ensuring a responsive and engaging user experience.`}
           />
           <HomeService
-            img={im1}
+            img={im3}
             title={`MERN Stack Expertise`}
             des={` Harness the power of the MERN (MongoDB, Express, React, Node.js)
                 stack to build robust, full-stack applications that drive
                 innovation.`}
           />
           <HomeService
-            img={im1}
+            img={im4}
             title={`Raw PHP Projects`}
             des={` Deliver tailor-made solutions with expertise in PHP, creating
                 custom web applications that cater to unique business needs.`}
           />
           <HomeService
-            img={im1}
+            img={im5}
             title={`Computer Graphics Projects`}
             des={`Bring ideas to life through captivating computer graphics
                 projects, combining creativity and technology for stunning
                 visual experiences.`}
           />
           <HomeService
-            img={im1}
+            img={im6}
             title={`Machine Learning Projects`}
             des={`Unlock actionable insights from data with machine learning
                 projects that transform complex information into strategic

@@ -18,7 +18,7 @@ const Section2 = () => {
         <></>
       )}
       <div
-        className={` md:px-28 py-0 lg:py-24  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 ${
+        className={` md:px-28 py-0 lg:py-5  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 ${
           darkmode ? "dark" : "light"
         }`}
       >
