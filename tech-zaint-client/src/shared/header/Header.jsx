@@ -90,7 +90,9 @@ const Header = () => {
               {navlink}
             </ul>
           </div>
-          <a className=" absolute text-2xl font-serif font-bold">TechZaint</a>
+          <a className=" absolute font-serif font-bold ml-16 md:ml-72 md:text-2xl lg:ml-14 text-24">
+            TechZaint
+          </a>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul

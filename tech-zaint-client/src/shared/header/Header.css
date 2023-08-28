@@ -26,6 +26,7 @@ ul li a:focus {
   background-color: rgb(234, 237, 237) !important;
 }
 
+
 /* Responsive at Media Screen */
 @media screen and (max-width: 576px) {
   ul li {
@@ -36,6 +37,14 @@ ul li a:focus {
   }
   ul li a:focus {
     padding: 12px;
+  }
+  .text-24{
+    font-size: 25px;
+  }
+}
+@media screen and (max-width: 350px) {
+  .text-24{
+    font-size: 18px;
   }
 }
 
