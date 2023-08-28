@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import "./Footer.css";
 import { darkContext } from "../../context/darkmode/DarkContext";
-import footerLogo from "../../assets/brand/brand.png"
+import footerLogo from "../../assets/brand/brand.png";
 
 const Footer = () => {
   const { darkmode } = useContext(darkContext);
@@ -44,10 +44,12 @@ const Footer = () => {
         </div>
         <div>
           <span className="footer-title">Get In Touch</span>
-          <p className="">Email:<a href="#" className="link link-hover">info@techzaint.com</a></p>
-          <p className="">Sales: <a href="#" className="link link-hover">sales@techzaint.com</a></p>
-          <p className="">Address: Dhaka, Bangladesh</p>
-          
+          <p className="">
+            <a href="mailto:info@techzaint.com" className="link link-hover">
+              info@techzaint.com
+            </a>
+          </p>
+          <p className="">Newyork, USA</p>
         </div>
       </footer>
       <footer
@@ -57,11 +59,11 @@ const Footer = () => {
       >
         <div className="items-center grid-flow-col">
           <div>
-            <img src={footerLogo} width={30} alt="" />
+            <img src={footerLogo} width={70} alt="" />
           </div>
-          <p>
-            TechZaint Ltd. <br />
-            Providing reliable tech since {year}
+          <p className="leading-[2]">
+            <span className="text-2xl">TechZaint Ltd.</span> <br />
+            Providing reliable tech💗, Since 2022 - {year} &copy;
           </p>
         </div>
         <div className="md:place-self-center md:justify-self-end">

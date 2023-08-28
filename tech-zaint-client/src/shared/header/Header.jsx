@@ -39,7 +39,7 @@ const Header = () => {
         <Link to="/">Home</Link>
       </li>
       <li className="relative services">
-        <Link to="#">Services</Link>
+        <Link to="services">Services</Link>
       </li>
       <li>
         <Link to="/products">Products</Link>
@@ -128,7 +128,7 @@ const Header = () => {
                   }`}
                 >
                   <img src={cartIcon} width={30} alt="" />
-                  <span className="badge badge-sm indicator-item">8</span>
+                  <span className="badge badge-sm indicator-item">8+</span>
                 </div>
               </label>
               <div
@@ -168,6 +168,9 @@ const Header = () => {
                 </li>
                 <li>
                   <a>Settings</a>
+                </li>
+                <li>
+                  <a href="/login">Login</a>
                 </li>
                 <li>
                   <a>Logout</a>
