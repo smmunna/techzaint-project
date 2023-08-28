@@ -1,18 +1,24 @@
 import { useContext } from "react";
 import ContactForm from "../../components/ContactForm/ContactForm";
 import HomeTitle from "../../components/HomeTitle/HomeTitle";
-import {darkContext} from "../../context/darkmode/DarkContext"
-import im1 from "../../assets/cover/cover2.jpg"
-import Cover from "../../components/Cover/Cover"
+import { darkContext } from "../../context/darkmode/DarkContext";
+import im1 from "../../assets/cover/cover2.jpg";
+import Cover from "../../components/Cover/Cover";
+import { Helmet } from "react-helmet-async";
+import favIcon from "../../assets/brand/brand.png";
 
 const ContactUs = () => {
-    const {darkmode}=useContext(darkContext)
+  const { darkmode } = useContext(darkContext);
   return (
     <div>
-    <div>
-        <Cover img={im1} title={`Contact Us`}/>
-    </div>
-      <div className={`py-20 px-5 md:px-24 ${darkmode?'dark':'light'}`}>
+      <Helmet>
+        <title>Contact | TechZaint</title>
+        <link rel="shortcut icon" href={favIcon} type="image/x-icon" />
+      </Helmet>
+      <div>
+        <Cover img={im1} title={`Contact Us`} />
+      </div>
+      <div className={`py-20 px-5 md:px-24 ${darkmode ? "dark" : "light"}`}>
         <div>
           {/* div one */}
           <div className="grid gri-cols-1 lg:grid-cols-2 gap-5">
@@ -28,7 +34,7 @@ const ContactUs = () => {
                   </h3>
                   <h3>
                     <span className="font-bold text-yellow-400">Info:</span>{" "}
-                    info@techzaint.com
+                    <a href="mailto:info@techzaint.com">info@techzaint.com</a>
                   </h3>
                   <h3>
                     <span className="font-bold text-yellow-400">Phone:</span>{" "}
@@ -88,7 +94,7 @@ const ContactUs = () => {
           {/* div two for form */}
           <div>
             <div className="mt-8">
-              <HomeTitle title={`Contact through the Form`} />
+              <HomeTitle title={`Contact Form`} />
               <ContactForm />
             </div>
           </div>

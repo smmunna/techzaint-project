@@ -6,12 +6,20 @@ import AboutusDetail from "../../components/AboutusDetail/AboutusDetail";
 import AboutusMission from "../../components/AboutusDetail/AboutusMission";
 import { useContext } from "react";
 import { darkContext } from "../../context/darkmode/DarkContext";
+import { Helmet } from "react-helmet-async";
+import favIcon from "../../assets/brand/brand.png"
 
 const AboutUs = () => {
   const { darkmode } = useContext(darkContext);
 
   return (
     <div className={`${darkmode ? "dark" : "light"}`}>
+    
+    <Helmet>
+        <title>About | TechZaint</title>
+        <link rel="shortcut icon" href={favIcon} type="image/x-icon" />
+      </Helmet>
+
       <Cover img={im1} title={`About us`} />
       {/* Details about us */}
       <AboutusDetail

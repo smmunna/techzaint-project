@@ -6,20 +6,40 @@ import userIcon from "../../assets/icons/user.png";
 import darkmoodIcon from "../../assets/icons/dark.png";
 import lightmoodIcon from "../../assets/icons/light.png";
 import cartIcon from "../../assets/icons/cart.png";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { darkContext } from "../../context/darkmode/DarkContext";
 
 const Header = () => {
   const [menuIcon, setMenuicon] = useState(false);
   const { darkmode, setDarkmode } = useContext(darkContext);
 
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setMenuicon(false);
+      }
+    };
+
+    if (menuIcon) {
+      document.addEventListener("mousedown", handleOutsideClick);
+    } else {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [menuIcon]);
+
   const navlink = (
     <>
       <li>
         <Link to="/">Home</Link>
       </li>
-      <li>
-        <Link to="/services">Services</Link>
+      <li className="relative services">
+        <Link to="#">Services</Link>
       </li>
       <li>
         <Link to="/products">Products</Link>
@@ -28,7 +48,7 @@ const Header = () => {
         <Link to="/courses">Courses</Link>
       </li>
       <li>
-        <Link to="/about">About Us</Link>
+        <Link to="/about">About</Link>
       </li>
       <li>
         <Link to="/contact">Contact</Link>
@@ -43,13 +63,13 @@ const Header = () => {
         }`}
       >
         <div className="navbar-start">
-          <div className="dropdown -mr-20">
-            <label tabIndex={0} className="btn btn-ghost  lg:hidden">
+          <div className="dropdown -mr-20" ref={dropdownRef}>
+            <label tabIndex={1} className="btn btn-ghost lg:hidden">
               <div onClick={() => setMenuicon(!menuIcon)}>
                 {menuIcon ? (
                   <>
                     {" "}
-                    <img src={MenuCrossIcon} width={30} alt="" />
+                    <img src={MenuCrossIcon} width={24} alt="" />
                   </>
                 ) : (
                   <>
@@ -60,7 +80,7 @@ const Header = () => {
               </div>
             </label>
             <ul
-              tabIndex={0}
+              tabIndex={1}
               className={` dropdown-content text-center mt-3 z-10  p-4 shadow ${
                 darkmode ? "dark" : "light"
               } w-[350px] border-2 border-b-slate-600 ${
@@ -101,7 +121,9 @@ const Header = () => {
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="">
                 <div
-                  className={`indicator mr-4 ${darkmode ? "dark" : "light"}`}
+                  className={`indicator cursor-pointer mr-4 ${
+                    darkmode ? "dark" : "light"
+                  }`}
                 >
                   <img src={cartIcon} width={30} alt="" />
                   <span className="badge badge-sm indicator-item">8</span>
