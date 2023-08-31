@@ -1,0 +1,15 @@
+.course__card{
+    border: 2px solid rgba(0, 0, 0, 0.096);
+    position: relative;
+}
+.course__priceCard{
+    background-color: rgb(0, 0, 0);
+    padding: 12px;
+    color: white;
+    font-size: 22px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;
+    
+}

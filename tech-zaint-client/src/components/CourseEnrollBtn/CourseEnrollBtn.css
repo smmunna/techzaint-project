@@ -1,0 +1,9 @@
+.courseEnroll__btn{
+    border: 1px solid black;
+    background-color: rgb(230, 238, 255);
+}
+
+.enroll__btnComponent{
+    display: flex;
+    justify-content: space-between!important;
+}
