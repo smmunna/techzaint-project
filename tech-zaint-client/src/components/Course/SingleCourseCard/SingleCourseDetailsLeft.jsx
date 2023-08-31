@@ -8,7 +8,7 @@ const SingleCourseDetailsLeft = ({ singleCourse }) => {
   const { title, description, price } = singleCourse;
   return (
     <div>
-      <div className={`py-12 space-y-8 ${darkmode ? "dark" : "light"}`}>
+      <div className={`py-12 space-y-8`}>
         <div>
           <h3 className="text-3xl font-bold">{title}</h3>
         </div>
@@ -61,10 +61,8 @@ const SingleCourseDetailsLeft = ({ singleCourse }) => {
           </div>
         </div>
 
-    {/* How to Pay? */}
-    <PaymentTuitorials/>
-
-
+        {/* How to Pay? */}
+        <PaymentTuitorials />
       </div>
     </div>
   );

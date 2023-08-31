@@ -1,10 +1,13 @@
 import "./CourseCard.css";
 import CourseEnrollBtn from "../../CourseEnrollBtn/CourseEnrollBtn";
+import { useContext } from "react";
+import { darkContext } from "../../../context/darkmode/DarkContext";
 const CourseCard = ({ course }) => {
+  const{darkmode}=useContext(darkContext)
   const { id, title, description, price, thumbnail } = course;
   return (
     <div>
-      <div className={`h-full course__card p-4 space-y-5`}>
+      <div className={`h-full course__card p-4 space-y-5 ${darkmode?'dark':''}`}>
         <div className="flex justify-center">
           <img src={thumbnail} className="w-[350px] h-[250px]" alt="" />
         </div>

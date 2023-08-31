@@ -17,7 +17,7 @@ const SingleCourseCardRight = () => {
           ></iframe>
         </div>
 
-        <div className="text-slate-600 space-y-2">
+        <div className=" space-y-2">
           <div className="flex gap-2 font-semibold text-lg">
             <div>
               <img src={img2} width={30} alt="" />

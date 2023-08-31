@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import img from "../../../assets/cover/cover1.jpg";
 import HomeTitle from "../../../components/HomeTitle/HomeTitle";
 import PageTitle from "../../../components/PageTitle/PageTitle";
@@ -7,10 +7,12 @@ import { useEffect } from "react";
 import Axios from "../../../axios/Axios";
 import CourseCard from "../../../components/Course/CourseCard/CourseCard";
 import Spinner from "../../../components/Spinner/Spinner";
+import { darkContext } from "../../../context/darkmode/DarkContext";
 
 const LearnLanguages = () => {
   const [languages, setLanguages] = useState([]);
   const [changePage, setChangePage] = useState(1);
+  const {darkmode}=useContext(darkContext);
 
   useEffect(() => {
     Axios.get("/products").then((res) => setLanguages(res.data.products));
@@ -19,7 +21,7 @@ const LearnLanguages = () => {
   const perpageItem = Math.round(languages.length) / 3;
 
   return (
-    <div>
+    <div className={`${darkmode?'dark':'light'}`}>
       <PageTitle title={`Languages`} />
       <Cover title={`Learn Languages`} img={img} />
       <div className="px-5 md:px-24 py-5">
@@ -37,8 +39,8 @@ const LearnLanguages = () => {
         <div className="text-center">
           <div className="join">
             <button
-              className={`join-item btn ${
-                changePage <= 1 ? "btn btn-disabled" : ""
+              className={`${darkmode?'':''} join-item btn ${
+                changePage <= 1 ? "btn btn-disabled bg-white" : ""
               }`}
               onClick={() => setChangePage(changePage - 1)}
             >
