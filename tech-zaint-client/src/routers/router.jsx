@@ -8,6 +8,7 @@ import AboutUs from "../pages/AboutUs/AboutUs";
 import ContactUs from "../pages/ContactUs/ContactUs";
 import Services from "../pages/Services/Services";
 import LearnLanguages from "../pages/Services/LearnLanguages/LearnLanguages";
+import SingleCourseCard from "../components/Course/SingleCourseCard/SingleCourseCard";
 
 const router = createBrowserRouter([
     {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
         {
             path:"/learn-languages",
             element:<LearnLanguages/>
+        },
+        {
+            path:"/learn-languages/:id",
+            element:<SingleCourseCard/>
         }
       ]
     },

@@ -1,7 +1,10 @@
+.navbar{
+  border-bottom: 1px solid rgba(0, 0, 0, 0.185);
+}
 /* Darkmode and light mode controlling start */
 .light {
-  background-color: rgb(249, 251, 252);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.185);
+  background-color: rgb(255, 255, 255);
+  /* border-bottom: 1px solid rgba(0, 0, 0, 0.185); */
   transition: all 0.5s ease-in-out;
 }
 .dark {

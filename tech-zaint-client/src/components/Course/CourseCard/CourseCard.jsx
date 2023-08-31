@@ -1,7 +1,7 @@
 import "./CourseCard.css";
 import CourseEnrollBtn from "../../CourseEnrollBtn/CourseEnrollBtn";
 const CourseCard = ({ course }) => {
-  const { title, description, price, thumbnail } = course;
+  const { id, title, description, price, thumbnail } = course;
   return (
     <div>
       <div className={`h-full course__card p-4 space-y-5`}>
@@ -19,7 +19,7 @@ const CourseCard = ({ course }) => {
             <h3>Price: {price}$</h3>
           </div>
           <div>
-            <CourseEnrollBtn />
+            <CourseEnrollBtn id={id} />
           </div>
         </div>
       </div>
