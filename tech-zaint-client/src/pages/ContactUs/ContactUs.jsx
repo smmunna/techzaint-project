@@ -4,17 +4,13 @@ import HomeTitle from "../../components/HomeTitle/HomeTitle";
 import { darkContext } from "../../context/darkmode/DarkContext";
 import im1 from "../../assets/cover/cover2.jpg";
 import Cover from "../../components/Cover/Cover";
-import { Helmet } from "react-helmet-async";
-import favIcon from "../../assets/brand/brand.png";
+import PageTitle from "../../components/PageTitle/PageTitle";
 
 const ContactUs = () => {
   const { darkmode } = useContext(darkContext);
   return (
     <div>
-      <Helmet>
-        <title>Contact | TechZaint</title>
-        <link rel="shortcut icon" href={favIcon} type="image/x-icon" />
-      </Helmet>
+    <PageTitle title={`Contact`}/>
       <div>
         <Cover img={im1} title={`Contact Us`} />
       </div>

@@ -7,6 +7,7 @@ import Error from "../shared/error/Error";
 import AboutUs from "../pages/AboutUs/AboutUs";
 import ContactUs from "../pages/ContactUs/ContactUs";
 import Services from "../pages/Services/Services";
+import LearnLanguages from "../pages/Services/LearnLanguages/LearnLanguages";
 
 const router = createBrowserRouter([
     {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
         {
             path:"/services",
             element:<Services/>
+        },
+        {
+            path:"/learn-languages",
+            element:<LearnLanguages/>
         }
       ]
     },

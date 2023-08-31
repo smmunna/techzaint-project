@@ -4,8 +4,7 @@ import "./Register.css";
 import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import { darkContext } from "../../context/darkmode/DarkContext";
-import { Helmet } from "react-helmet-async";
-import favIcon from "../../assets/brand/brand.png"
+import PageTitle from "../../components/PageTitle/PageTitle";
 
 const Register = () => {
   const [error, setError] = useState("");
@@ -78,10 +77,7 @@ const Register = () => {
 
   return (
     <div className={`text-black ${darkmode?'dark text-black':'light'}`}>
-     <Helmet>
-        <title>Register | TechZaint</title>
-        <link rel="shortcut icon" href={favIcon} type="image/x-icon" />
-      </Helmet>
+     <PageTitle title={`Register`}/>
       <div className="flex justify-center font-serif py-12 px-4 ">
         {/* staring of a form */}
         <div>

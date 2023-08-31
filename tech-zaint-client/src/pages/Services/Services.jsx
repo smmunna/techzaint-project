@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import img from "../../assets/banner/banner2.jpg";
 import Cover from "../../components/Cover/Cover";
 import Axios from "../../axios/Axios";
-import { Link } from "react-router-dom";
 import CourseCard from "../../components/Course/CourseCard/CourseCard";
 import HomeTitle from "../../components/HomeTitle/HomeTitle";
-import { Helmet } from "react-helmet-async";
-import favIcon from "../../assets/brand/brand.png";
 import ExploreMoreBtn from "../../components/ExploreMoreBtn/ExploreMoreBtn";
+import ServicesList from "../../components/ServicesList/ServicesList";
+import PageTitle from "../../components/PageTitle/PageTitle";
+import Spinner from "../../components/Spinner/Spinner";
 
 const Services = () => {
   const [courses, setCourses] = useState([]);
@@ -18,32 +18,18 @@ const Services = () => {
   }, []);
   return (
     <div>
-      <Helmet>
-        <title>Services | TechZaint</title>
-        <link rel="shortcut icon" href={favIcon} type="image/x-icon" />
-      </Helmet>
-
+      <PageTitle title={`Services`} />
       <Cover title={`Explore our Services`} img={img} />
       <div className="px-5 lg:px-20">
         <div>
           <h3 className="text-3xl py-3 font-bold">Course Category</h3>
           <hr />
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 my-5 text-center">
-            <div className="border-2 p-4 bg-slate-100 font-bold">
-              <Link>Programming Languages</Link>
-            </div>
-            <div className="border-2 p-4 bg-slate-100 font-bold">
-              <Link>Web Development</Link>
-            </div>
-            <div className="border-2 p-4 bg-slate-100 font-bold">
-              <Link>Frontend Library</Link>
-            </div>
-            <div className="border-2 p-4 bg-slate-100 font-bold">
-              <Link>Backend Development</Link>
-            </div>
-            <div className="border-2 p-4 bg-slate-100 font-bold">
-              <Link>Backend Framework</Link>
-            </div>
+            <ServicesList title={`Learn Languages`} />
+            <ServicesList title={`Frontend Development`} />
+            <ServicesList title={`Backend Developemt`} />
+            <ServicesList title={`Buy Projects`} />
+            <ServicesList title={`Order Projects`} />
           </div>
         </div>
         <hr />
@@ -51,7 +37,11 @@ const Services = () => {
         <div className="py-4">
           <HomeTitle title={`Learn Languages`} />
         </div>
+
         <div>
+          {/* Loading Spinner */}
+          <Spinner item={courses} />
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-4">
             {courses.length > 3 ? (
               <>
@@ -70,19 +60,15 @@ const Services = () => {
           {courses.length > 3 && (
             <>
               <div className="pb-5">
-                <ExploreMoreBtn />
+                <ExploreMoreBtn link={`/learn-languages`} />
               </div>
             </>
           )}
         </div>
 
-{/* Web Design Courses */}
+        {/* Web Design Courses */}
 
-
-{/* Full Stack Web Development */}
-
-
-
+        {/* Full Stack Web Development */}
       </div>
     </div>
   );

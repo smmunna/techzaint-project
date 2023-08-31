@@ -4,8 +4,7 @@ import { Link } from "react-router-dom";
 import "./Login.css";
 import { useContext } from "react";
 import { darkContext } from "../../context/darkmode/DarkContext";
-import { Helmet } from "react-helmet-async";
-import favIcon from "../../assets/brand/brand.png"
+import PageTitle from "../../components/PageTitle/PageTitle";
 
 const Login = () => {
   const{darkmode}=useContext(darkContext)
@@ -19,10 +18,7 @@ const Login = () => {
   };
   return (
     <div className={`px-3 font-serif min-h-screen ${darkmode ? 'dark':'light'}`}>
-     <Helmet>
-        <title> Login | TechZaint</title>
-        <link rel="shortcut icon" href={favIcon} type="image/x-icon" />
-      </Helmet>
+     <PageTitle title={`Login`}/>
       <div className="flex justify-center items-center pt-20 pb-5">
         <div className="border-2 border-slate-200 p-4">
           <h3 className="text-2xl font-bold mb-4">
