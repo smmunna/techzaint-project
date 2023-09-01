@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation} from "react-router-dom";
 import "./Header.css";
 import MenuIcon from "../../assets/icons/menu.png";
 import MenuCrossIcon from "../../assets/icons/menu_cross.png";
@@ -14,7 +14,10 @@ const Header = () => {
   const [menuIcon, setMenuicon] = useState(false);
   const { darkmode, setDarkmode } = useContext(darkContext);
   const { user } = useContext(AuthContext);
-  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Getting the exact path;
+  let from = location.state?.from?.pathname || "/";
 
   console.log(user);
 

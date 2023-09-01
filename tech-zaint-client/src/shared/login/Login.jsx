@@ -1,6 +1,6 @@
 import GoogleIcon from "../../assets/icons/google.png";
 import GitIcon from "../../assets/icons/github.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Login.css";
 import { useContext, useState } from "react";
 import { darkContext } from "../../context/darkmode/DarkContext";
@@ -11,8 +11,13 @@ import { AuthContext } from "../../provider/AuthProvider";
 const Login = () => {
   const { darkmode } = useContext(darkContext);
   const [error, setError] = useState("");
-  const{setUser} = useContext(AuthContext)
+  const { setUser } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  const location = useLocation();
+
+  // Getting the exact path;
+  let from = location.state?.from?.pathname || "/";
 
   const handleLoginForm = (e) => {
     e.preventDefault();
@@ -25,6 +30,7 @@ const Login = () => {
       password,
     };
 
+    // Sending data to server for  login
     fetch(`${import.meta.env.VITE_LOCAL_SERVER}/user/login`, {
       method: "POST",
       headers: {
@@ -47,9 +53,9 @@ const Login = () => {
             showConfirmButton: false,
             timer: 1500,
           });
-          navigate('/')
-          localStorage.setItem('email',data.email)
-          setUser(localStorage.getItem('email'))
+          localStorage.setItem("email", data.email);
+          setUser(localStorage.getItem("email"));
+          navigate(from, { replace: true });
         }
       });
   };
