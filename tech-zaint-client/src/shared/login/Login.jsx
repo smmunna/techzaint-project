@@ -1,29 +1,69 @@
 import GoogleIcon from "../../assets/icons/google.png";
 import GitIcon from "../../assets/icons/github.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { darkContext } from "../../context/darkmode/DarkContext";
 import PageTitle from "../../components/PageTitle/PageTitle";
+import Swal from "sweetalert2";
+import { AuthContext } from "../../provider/AuthProvider";
 
 const Login = () => {
-  const{darkmode}=useContext(darkContext)
+  const { darkmode } = useContext(darkContext);
+  const [error, setError] = useState("");
+  const{setUser} = useContext(AuthContext)
+  const navigate = useNavigate();
 
   const handleLoginForm = (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
+
+    const info = {
+      email,
+      password,
+    };
+
+    fetch(`${import.meta.env.VITE_LOCAL_SERVER}/user/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(info),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.error) {
+          setError(data.error);
+          return;
+        }
+        setError("");
+        if (data.status == "ok") {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: data.result,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigate('/')
+          localStorage.setItem('email',data.email)
+          setUser(localStorage.getItem('email'))
+        }
+      });
   };
   return (
-    <div className={`px-3 font-serif min-h-screen ${darkmode ? 'dark':'light'}`}>
-     <PageTitle title={`Login`}/>
+    <div
+      className={`px-3 font-serif min-h-screen ${darkmode ? "dark" : "light"}`}
+    >
+      <PageTitle title={`Login`} />
       <div className="flex justify-center items-center pt-20 pb-5">
         <div className="border-2 border-slate-200 p-4">
           <h3 className="text-2xl font-bold mb-4">
             Please, Login to your account
           </h3>
+          {error && <p className="text-red-600 font-bold py-2">{error}</p>}
           <hr className="mb-4" />
           {/* form start */}
           <form onSubmit={handleLoginForm}>

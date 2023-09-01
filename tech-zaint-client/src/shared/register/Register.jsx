@@ -1,11 +1,11 @@
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import "./Register.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { darkContext } from "../../context/darkmode/DarkContext";
 import PageTitle from "../../components/PageTitle/PageTitle";
-import Axios from "../../axios/Axios";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const [error, setError] = useState("");
@@ -13,6 +13,8 @@ const Register = () => {
   const [phone, setPhone] = useState("");
   const [photo, setPhoto] = useState("");
   const { darkmode } = useContext(darkContext);
+  const navigate = useNavigate();
+
   // Gender Taking..
   const handleOptionChange = (e) => {
     setGender(e.target.value);
@@ -87,8 +89,24 @@ const Register = () => {
       body: formData, // Use the FormData object as the body
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
-      // form.reset()
+      .then((data) => {
+        if (data.exist === "Email already exist") {
+          setError("Email already exist, try with different one.");
+          return;
+        }
+        if (data.status === "ok") {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Registration successfull",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          setError("");
+          navigate("/login");
+        }
+      });
+    // form.reset()
   };
 
   return (

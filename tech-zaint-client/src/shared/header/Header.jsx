@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
 import MenuIcon from "../../assets/icons/menu.png";
 import MenuCrossIcon from "../../assets/icons/menu_cross.png";
@@ -8,12 +8,22 @@ import lightmoodIcon from "../../assets/icons/light.png";
 import cartIcon from "../../assets/icons/cart.png";
 import { useContext, useEffect, useRef, useState } from "react";
 import { darkContext } from "../../context/darkmode/DarkContext";
+import { AuthContext } from "../../provider/AuthProvider";
 
 const Header = () => {
   const [menuIcon, setMenuicon] = useState(false);
   const { darkmode, setDarkmode } = useContext(darkContext);
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  console.log(user);
 
   const dropdownRef = useRef(null);
+
+  const handleLogout = () => {
+    localStorage.removeItem("email");
+    window.location.href = "/";
+  };
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -160,21 +170,31 @@ const Header = () => {
                   darkmode ? "dark" : "light"
                 } rounded-box w-52`}
               >
-                <li>
-                  <Link to="#" className="justify-between">
-                    Profile
-                    <span className="badge">New</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link to="#">Settings</Link>
-                </li>
-                <li>
-                  <Link to="/login">Login</Link>
-                </li>
-                <li>
-                  <Link to="#">Logout</Link>
-                </li>
+                {user ? (
+                  <>
+                    <li>
+                      <Link to="/profile" className="justify-between">
+                        Profile
+                        <span className="badge">New</span>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="#">Dashboard</Link>
+                    </li>
+                    <li>
+                      <Link to="#">Settings</Link>
+                    </li>
+                    <li>
+                      <Link onClick={handleLogout}>Logout</Link>
+                    </li>
+                  </>
+                ) : (
+                  <>
+                    <li>
+                      <Link to="/login">Login</Link>
+                    </li>
+                  </>
+                )}
               </ul>
             </div>
           </div>
