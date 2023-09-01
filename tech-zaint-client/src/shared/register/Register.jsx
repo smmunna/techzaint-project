@@ -5,14 +5,14 @@ import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import { darkContext } from "../../context/darkmode/DarkContext";
 import PageTitle from "../../components/PageTitle/PageTitle";
+import Axios from "../../axios/Axios";
 
 const Register = () => {
   const [error, setError] = useState("");
   const [gender, setGender] = useState("");
   const [phone, setPhone] = useState("");
   const [photo, setPhoto] = useState("");
-  const{darkmode} = useContext(darkContext);
-
+  const { darkmode } = useContext(darkContext);
   // Gender Taking..
   const handleOptionChange = (e) => {
     setGender(e.target.value);
@@ -35,9 +35,14 @@ const Register = () => {
     const email = form.email.value;
     const password = form.password.value;
     const confirmpass = form.confirmpass.value;
+    const dob = form.dob.value;
     const usergender = gender;
     const userphone = phone;
     const userphoto = photo;
+    const presentaddress = form.presentaddress.value;
+    const permanentaddress = form.permanentaddress.value;
+    const profession = form.profession.value;
+    const instituition = form.instituition.value;
 
     if (name.length > 25) {
       setError("Name can not be more than 25 character.!");
@@ -56,28 +61,39 @@ const Register = () => {
       setError("Please provide correct phone number..!");
       return;
     }
-    if (Math.round(photo.size / 1024) > 100) {
+    if (Math.round(userphoto.size / 1024) > 100) {
       setError("Photo Size not more than 100kb");
       return;
     }
     setError("");
 
     // Submitting the form;
-    const userinfo = {
-      displayName: name,
-      email,
-      password: confirmpass,
-      gender: usergender,
-      phone: userphone,
-      photo: userphoto,
-    };
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("password", confirmpass);
+    formData.append("gender", usergender);
+    formData.append("phone", userphone);
+    formData.append("dob", dob);
+    formData.append("presentaddress", presentaddress);
+    formData.append("permanentaddress", permanentaddress);
+    formData.append("profession", profession);
+    formData.append("instituition", instituition);
+    formData.append("photo", userphoto); // Append the uploaded file
 
-    console.log(userinfo);
+    // Send the FormData object using fetch
+    fetch(`${import.meta.env.VITE_LOCAL_SERVER}/user`, {
+      method: "POST",
+      body: formData, // Use the FormData object as the body
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+      // form.reset()
   };
 
   return (
-    <div className={`text-black ${darkmode?'dark text-black':'light'}`}>
-     <PageTitle title={`Register`}/>
+    <div className={`text-black ${darkmode ? "dark text-black" : "light"}`}>
+      <PageTitle title={`Register`} />
       <div className="flex justify-center font-serif py-12 px-4 ">
         {/* staring of a form */}
         <div>
@@ -87,7 +103,12 @@ const Register = () => {
             </h3>
           </div>
           <hr className="my-4" />
-          <form onSubmit={handleRegForm} encType="multipart/form-data">
+          <form
+            action="http://localhost:3000/user"
+            method="POST"
+            onSubmit={handleRegForm}
+            encType="multipart/form-data"
+          >
             <div className="md:border-2 md:p-4">
               {error && (
                 <div>
@@ -185,7 +206,7 @@ const Register = () => {
                     <input
                       className="login-input p-2 w-full md:w-[400px]"
                       type="date"
-                      name="confirmpassword"
+                      name="dob"
                       placeholder="Enter your password"
                       required
                     />
@@ -210,7 +231,7 @@ const Register = () => {
                     <input
                       className="login-input p-2 w-full md:w-[400px]"
                       type="text"
-                      name="address"
+                      name="presentaddress"
                       placeholder="Your present address"
                       required
                     />
@@ -224,7 +245,7 @@ const Register = () => {
                     <input
                       className="login-input p-2 w-full md:w-[400px]"
                       type="text"
-                      name="address"
+                      name="permanentaddress"
                       placeholder="Your permanent address"
                       required
                     />
@@ -246,7 +267,7 @@ const Register = () => {
                     <input
                       className="login-input p-2 w-full md:w-[400px]"
                       type="text"
-                      name="profession"
+                      name="instituition"
                       placeholder="University/school/college/company name..."
                       required
                     />
@@ -257,7 +278,7 @@ const Register = () => {
                     <input
                       className="login-input p-2 w-full md:w-[400px]"
                       type="file"
-                      name="displayPhoto"
+                      name="photo"
                       onChange={handlePhotoChange}
                     />
                   </div>
