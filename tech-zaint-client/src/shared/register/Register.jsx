@@ -6,6 +6,7 @@ import { useContext, useState } from "react";
 import { darkContext } from "../../context/darkmode/DarkContext";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../provider/AuthProvider";
 
 const Register = () => {
   const [error, setError] = useState("");
@@ -13,6 +14,7 @@ const Register = () => {
   const [phone, setPhone] = useState("");
   const [photo, setPhoto] = useState("");
   const { darkmode } = useContext(darkContext);
+  const { createUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
   // Gender Taking..
@@ -55,6 +57,10 @@ const Register = () => {
       return;
     }
 
+    if (password.length < 6) {
+      setError("Password length must be 6 characters long..!");
+      return;
+    }
     if (password != confirmpass) {
       setError("Password did not match with confirm password..!");
       return;
@@ -84,29 +90,38 @@ const Register = () => {
     formData.append("photo", userphoto); // Append the uploaded file
 
     // Send the FormData object using fetch
-    fetch(`${import.meta.env.VITE_LOCAL_SERVER}/user`, {
-      method: "POST",
-      body: formData, // Use the FormData object as the body
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.exist === "Email already exist") {
-          setError("Email already exist, try with different one.");
+    createUser(email, confirmpass)
+      .then((result) => {
+        const user = result.user;
+        if (user) {
+          fetch(`http://localhost:3000/user`, {
+            method: "POST",
+            body: formData, // Use the FormData object as the body
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.status === "ok") {
+                Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  title: "Registration successfull",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+                setError("");
+                navigate("/login");
+              }
+            });
+          // form.reset()
+        }
+      })
+      .catch((error) => {
+        if (error.message == "Firebase: Error (auth/email-already-in-use).") {
+          setError("Email is already in use !");
           return;
         }
-        if (data.status === "ok") {
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Registration successfull",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          setError("");
-          navigate("/login");
-        }
+        setError("");
       });
-    // form.reset()
   };
 
   return (
@@ -166,7 +181,7 @@ const Register = () => {
                     <p>Password: </p>
                     <input
                       className="login-input p-2 w-full md:w-[400px]"
-                      type="password"
+                      type="text"
                       name="password"
                       placeholder="Enter your password"
                       required
@@ -177,7 +192,7 @@ const Register = () => {
                     <p>Confirm Password: </p>
                     <input
                       className="login-input p-2 w-full md:w-[400px]"
-                      type="password"
+                      type="text"
                       name="confirmpass"
                       placeholder="Enter your password"
                     />

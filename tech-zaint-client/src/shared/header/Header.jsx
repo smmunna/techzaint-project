@@ -1,4 +1,4 @@
-import { Link, useLocation} from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./Header.css";
 import MenuIcon from "../../assets/icons/menu.png";
 import MenuCrossIcon from "../../assets/icons/menu_cross.png";
@@ -13,19 +13,20 @@ import { AuthContext } from "../../provider/AuthProvider";
 const Header = () => {
   const [menuIcon, setMenuicon] = useState(false);
   const { darkmode, setDarkmode } = useContext(darkContext);
-  const { user } = useContext(AuthContext);
-  const location = useLocation();
-
-  // Getting the exact path;
-  let from = location.state?.from?.pathname || "/";
-
-  console.log(user);
-
+  const { user, logOut } = useContext(AuthContext);
   const dropdownRef = useRef(null);
 
+  //Logout
   const handleLogout = () => {
-    localStorage.removeItem("email");
-    window.location.href = "/";
+    logOut()
+      .then(() => {
+        // Sign-out successful.
+        navigate("/");
+      })
+      .catch((error) => {
+        // An error happened.
+        console.log(error);
+      });
   };
 
   useEffect(() => {

@@ -11,7 +11,7 @@ import { AuthContext } from "../../provider/AuthProvider";
 const Login = () => {
   const { darkmode } = useContext(darkContext);
   const [error, setError] = useState("");
-  const { setUser } = useContext(AuthContext);
+  const { signInUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const location = useLocation();
@@ -24,38 +24,30 @@ const Login = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-
-    const info = {
-      email,
-      password,
-    };
-
-    // Sending data to server for  login
-    fetch(`${import.meta.env.VITE_LOCAL_SERVER}/user/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(info),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.error) {
-          setError(data.error);
-          return;
-        }
-        setError("");
-        if (data.status == "ok") {
+    // signInUser;
+    signInUser(email, password)
+      .then((result) => {
+        const user = result.user;
+        if (user) {
           Swal.fire({
             position: "center",
             icon: "success",
-            title: data.result,
+            title: "Login successfull",
             showConfirmButton: false,
             timer: 1500,
           });
-          localStorage.setItem("email", data.email);
-          setUser(localStorage.getItem("email"));
           navigate(from, { replace: true });
+        }
+      })
+      .catch((error) => {
+        const errorMsg = error.message;
+        // console.log(errorMsg)
+        if (errorMsg == "Firebase: Error (auth/wrong-password).") {
+          setError("Wrong Useremail or Password");
+        } else if (errorMsg == "Firebase: Error (auth/user-not-found).") {
+          setError("Wrong Useremail or Password");
+        } else {
+          setError("");
         }
       });
   };
