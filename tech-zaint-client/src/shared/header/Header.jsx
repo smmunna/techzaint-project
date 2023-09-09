@@ -9,12 +9,19 @@ import cartIcon from "../../assets/icons/cart.png";
 import { useContext, useEffect, useRef, useState } from "react";
 import { darkContext } from "../../context/darkmode/DarkContext";
 import { AuthContext } from "../../provider/AuthProvider";
+import Axios from "../../axios/Axios";
 
 const Header = () => {
   const [menuIcon, setMenuicon] = useState(false);
   const { darkmode, setDarkmode } = useContext(darkContext);
   const { user, logOut } = useContext(AuthContext);
   const dropdownRef = useRef(null);
+  const[userdata,setUserdata]=useState([])
+
+  useEffect(()=>{
+    Axios.get(`/user/user-info?email=${user?.email}`)
+    .then(res=>setUserdata(res.data))
+  },[])
 
   //Logout
   const handleLogout = () => {
@@ -41,7 +48,6 @@ const Header = () => {
     } else {
       document.removeEventListener("mousedown", handleOutsideClick);
     }
-
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
@@ -165,7 +171,9 @@ const Header = () => {
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full">
-                  <img src={userIcon} />
+                  {
+                    user? <><img src={userdata?.photo} /></>:<><img src={userIcon} /></>
+                  }
                 </div>
               </label>
               <ul

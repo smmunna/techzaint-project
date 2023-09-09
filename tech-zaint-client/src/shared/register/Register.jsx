@@ -14,7 +14,7 @@ const Register = () => {
   const [phone, setPhone] = useState("");
   const [photo, setPhoto] = useState("");
   const { darkmode } = useContext(darkContext);
-  const { createUser } = useContext(AuthContext);
+  const { createUser, updateUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
   // Gender Taking..
@@ -94,25 +94,31 @@ const Register = () => {
       .then((result) => {
         const user = result.user;
         if (user) {
-          fetch(`http://localhost:3000/user`, {
-            method: "POST",
-            body: formData, // Use the FormData object as the body
-          })
-            .then((res) => res.json())
-            .then((data) => {
-              if (data.status === "ok") {
-                Swal.fire({
-                  position: "top-end",
-                  icon: "success",
-                  title: "Registration successfull",
-                  showConfirmButton: false,
-                  timer: 1500,
+          updateUser(user, name)
+            .then(() => {
+              fetch(`http://localhost:3000/user`, {
+                method: "POST",
+                body: formData, // Use the FormData object as the body
+              })
+                .then((res) => res.json())
+                .then((data) => {
+                  if (data.status === "ok") {
+                    Swal.fire({
+                      position: "top-end",
+                      icon: "success",
+                      title: "Registration successfull",
+                      showConfirmButton: false,
+                      timer: 1500,
+                    });
+                    setError("");
+                    navigate("/login");
+                  }
                 });
-                setError("");
-                navigate("/login");
-              }
+              // form.reset()
+            })
+            .catch((error) => {
+              // Error after update
             });
-          // form.reset()
         }
       })
       .catch((error) => {

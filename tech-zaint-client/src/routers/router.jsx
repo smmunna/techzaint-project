@@ -9,6 +9,7 @@ import ContactUs from "../pages/ContactUs/ContactUs";
 import Services from "../pages/Services/Services";
 import LearnLanguages from "../pages/Services/LearnLanguages/LearnLanguages";
 import SingleCourseCard from "../components/Course/SingleCourseCard/SingleCourseCard";
+import Profile from "../pages/Profile/Profile";
 
 const router = createBrowserRouter([
     {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
         {
             path:"/learn-languages/:id",
             element:<SingleCourseCard/>
+        },
+        {
+            path:"/profile",
+            element:<Profile/>
         },
         
        

@@ -15,7 +15,7 @@ const LearnLanguages = () => {
   const {darkmode}=useContext(darkContext);
 
   useEffect(() => {
-    Axios.get("/products").then((res) => setLanguages(res.data.products));
+    Axios.get("/courses").then((res) => setLanguages(res.data));
   }, []);
 
   const perpageItem = Math.round(languages.length) / 3;
