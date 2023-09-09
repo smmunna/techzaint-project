@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const ActivityList = ({name,link}) => {
+const ActivityList = ({ name, link }) => {
     return (
         <div>
             <div>

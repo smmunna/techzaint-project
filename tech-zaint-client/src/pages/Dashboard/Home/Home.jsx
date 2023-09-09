@@ -5,8 +5,8 @@ import PageTitle from "../../../components/PageTitle/PageTitle";
 const Home = () => {
     return (
         <div>
-            <PageTitle title={`Dashboard`}/>
-            <Cover title={`Welcome to Dashboard`} img={img}/>
+            <PageTitle title={`Dashboard`} />
+            <Cover title={`Welcome to Dashboard`} img={img} />
             <h3>I am from dashboaed home</h3>
         </div>
     );

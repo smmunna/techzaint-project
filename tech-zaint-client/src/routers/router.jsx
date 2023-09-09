@@ -16,64 +16,64 @@ import DashboardHome from "../pages/Dashboard/Home/Home"
 
 const router = createBrowserRouter([
     {
-      path: "/",
-      element: <Main/>,
-      children:[
-        {
-            path:"/",
-            element:<Home/>
-        },
-        {
-            path:"/contact",
-            element:<ContactUs/>
-        }
-        ,
-        {
-            path:"/about",
-            element:<AboutUs/>
-        },
-        {
-            path:"/services",
-            element:<Services/>
-        },
-        {
-            path:"/learn-languages",
-            element:<LearnLanguages/>
-        },
-        {
-            path:"/learn-languages/:id",
-            element:<SingleCourseCard/>
-        },
-        {
-            path:"/profile",
-            element:<PrivateRoutes><Profile/></PrivateRoutes>
-        },
-        
-       
-      ]
+        path: "/",
+        element: <Main />,
+        children: [
+            {
+                path: "/",
+                element: <Home />
+            },
+            {
+                path: "/contact",
+                element: <ContactUs />
+            }
+            ,
+            {
+                path: "/about",
+                element: <AboutUs />
+            },
+            {
+                path: "/services",
+                element: <Services />
+            },
+            {
+                path: "/learn-languages",
+                element: <LearnLanguages />
+            },
+            {
+                path: "/learn-languages/:id",
+                element: <SingleCourseCard />
+            },
+            {
+                path: "/profile",
+                element: <PrivateRoutes><Profile /></PrivateRoutes>
+            },
+
+
+        ]
     },
     {
-        path:'/dashboard',
-        element:<PrivateRoutes><Dashboard/></PrivateRoutes>,
-        children:[
+        path: '/dashboard',
+        element: <PrivateRoutes><Dashboard /></PrivateRoutes>,
+        children: [
             {
-                path:'',
-                element:<PrivateRoutes><DashboardHome/></PrivateRoutes>
+                path: '',
+                element: <PrivateRoutes><DashboardHome /></PrivateRoutes>
             }
         ]
     },
     {
-        path:"/login",
-        element:<Login/>
+        path: "/login",
+        element: <Login />
     },
     {
-        path:"/register",
-        element:<Register/>
+        path: "/register",
+        element: <Register />
     },
     {
-        path:"*",
-        element:<Error/>
+        path: "*",
+        element: <Error />
     }
-  ]);
+]);
 
-  export default router;
+export default router;
