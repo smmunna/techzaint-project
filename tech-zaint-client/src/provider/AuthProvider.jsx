@@ -45,6 +45,30 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
+
+      // jwt sign in to the local storage;
+      if (currentUser) {
+        const loggedUser = { email: currentUser.email }
+        fetch('http://localhost:3000/user/jwt', {
+          method: "POST",
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify(loggedUser)
+        })
+          .then(res => res.json())
+          .then(data => {
+            localStorage.setItem('access-token', data.token)
+          })
+          .catch(error => {
+            console.log(error.message)
+          })
+      }
+      else {
+        localStorage.removeItem('access-token')
+      }
+
+
     });
     return () => {
       return unsubscribe();

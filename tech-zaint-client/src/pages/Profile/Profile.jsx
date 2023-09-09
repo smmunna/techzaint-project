@@ -3,15 +3,16 @@ import PageTitle from "../../components/PageTitle/PageTitle";
 import Cover from "../../components/Cover/Cover";
 import img1 from "../../assets/cover/cover1.jpg";
 import { AuthContext } from "../../provider/AuthProvider";
-import Axios from "../../axios/Axios";
 import { darkContext } from "../../context/darkmode/DarkContext"
+import AxiosSecure from "../../axios/AxiosSecure";
 
 const Profile = () => {
   const { user } = useContext(AuthContext);
   const [userdata, setUserdata] = useState([]);
   const { darkmode } = useContext(darkContext)
+
   useEffect(() => {
-    Axios.get(`/user/user-info?email=${user?.email}`).then((res) =>
+    AxiosSecure.get(`/user/user-info?email=${user?.email}`).then((res) =>
       setUserdata(res.data)
     );
   }, [user]);
