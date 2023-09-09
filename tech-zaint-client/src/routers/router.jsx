@@ -10,6 +10,9 @@ import Services from "../pages/Services/Services";
 import LearnLanguages from "../pages/Services/LearnLanguages/LearnLanguages";
 import SingleCourseCard from "../components/Course/SingleCourseCard/SingleCourseCard";
 import Profile from "../pages/Profile/Profile";
+import Dashboard from "../layouts/dashboard/Dashboard";
+import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
+import DashboardHome from "../pages/Dashboard/Home/Home"
 
 const router = createBrowserRouter([
     {
@@ -43,11 +46,21 @@ const router = createBrowserRouter([
         },
         {
             path:"/profile",
-            element:<Profile/>
+            element:<PrivateRoutes><Profile/></PrivateRoutes>
         },
         
        
       ]
+    },
+    {
+        path:'/dashboard',
+        element:<PrivateRoutes><Dashboard/></PrivateRoutes>,
+        children:[
+            {
+                path:'',
+                element:<PrivateRoutes><DashboardHome/></PrivateRoutes>
+            }
+        ]
     },
     {
         path:"/login",

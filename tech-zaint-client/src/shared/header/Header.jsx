@@ -21,7 +21,10 @@ const Header = () => {
 
   useEffect(() => {
     Axios.get(`/user/user-info?email=${user?.email}`)
-      .then(res => setUserdata(res.data))
+      .then(res => {
+        setUserdata(res.data)
+        // console.log(res.data)
+      })
   }, [])
 
   //Logout
@@ -186,7 +189,7 @@ const Header = () => {
                       </Link>
                     </li>
                     <li>
-                      <Link to="#">Dashboard</Link>
+                      <Link to="/dashboard">Dashboard</Link>
                     </li>
                     <li>
                       <Link to="#">Settings</Link>
