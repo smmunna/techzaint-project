@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Header.css";
 import MenuIcon from "../../assets/icons/menu.png";
 import MenuCrossIcon from "../../assets/icons/menu_cross.png";
@@ -16,12 +16,13 @@ const Header = () => {
   const { darkmode, setDarkmode } = useContext(darkContext);
   const { user, logOut } = useContext(AuthContext);
   const dropdownRef = useRef(null);
-  const[userdata,setUserdata]=useState([])
+  const [userdata, setUserdata] = useState([])
+  const navigate = useNavigate()
 
-  useEffect(()=>{
+  useEffect(() => {
     Axios.get(`/user/user-info?email=${user?.email}`)
-    .then(res=>setUserdata(res.data))
-  },[])
+      .then(res => setUserdata(res.data))
+  }, [])
 
   //Logout
   const handleLogout = () => {
@@ -78,9 +79,8 @@ const Header = () => {
   return (
     <div>
       <div
-        className={`navbar fixed z-10 font-serif lg:px-10 ${
-          darkmode ? "dark" : "light"
-        }`}
+        className={`navbar fixed z-10 font-serif lg:px-10 ${darkmode ? "dark" : "light"
+          }`}
       >
         <div className="navbar-start">
           <div className="dropdown -mr-20" ref={dropdownRef}>
@@ -101,11 +101,9 @@ const Header = () => {
             </label>
             <ul
               tabIndex={1}
-              className={` dropdown-content text-center mt-3 z-10  p-4 shadow ${
-                darkmode ? "dark" : "light"
-              } w-[350px] border-2 border-b-slate-600 ${
-                menuIcon ? "" : "hidden"
-              }`}
+              className={` dropdown-content text-center mt-3 z-10  p-4 shadow ${darkmode ? "dark" : "light"
+                } w-[350px] border-2 border-b-slate-600 ${menuIcon ? "" : "hidden"
+                }`}
             >
               {navlink}
             </ul>
@@ -143,9 +141,8 @@ const Header = () => {
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="">
                 <div
-                  className={`indicator cursor-pointer mr-4 ${
-                    darkmode ? "dark" : "light"
-                  }`}
+                  className={`indicator cursor-pointer mr-4 ${darkmode ? "dark" : "light"
+                    }`}
                 >
                   <img src={cartIcon} width={30} alt="" />
                   <span className="badge badge-sm indicator-item">8+</span>
@@ -153,9 +150,8 @@ const Header = () => {
               </label>
               <div
                 tabIndex={0}
-                className={`mt-3 z-[1] card card-compact dropdown-content w-52 ${
-                  darkmode ? "dark" : "light"
-                } shadow`}
+                className={`mt-3 z-[1] card card-compact dropdown-content w-52 ${darkmode ? "dark" : "light"
+                  } shadow`}
               >
                 <div className="card-body">
                   <span className="font-bold text-lg">8 Items</span>
@@ -172,15 +168,14 @@ const Header = () => {
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full">
                   {
-                    user? <><img src={userdata?.photo} /></>:<><img src={userIcon} /></>
+                    user ? <><img src={userdata?.photo} /></> : <><img src={userIcon} /></>
                   }
                 </div>
               </label>
               <ul
                 tabIndex={0}
-                className={`menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow ${
-                  darkmode ? "dark" : "light"
-                } rounded-box w-52`}
+                className={`menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow ${darkmode ? "dark" : "light"
+                  } rounded-box w-52`}
               >
                 {user ? (
                   <>
