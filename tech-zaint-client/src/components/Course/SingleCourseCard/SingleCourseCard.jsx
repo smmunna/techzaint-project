@@ -13,7 +13,10 @@ const SingleCourseCard = () => {
   const{darkmode}=useContext(darkContext)
   const { id } = useParams();
   useEffect(() => {
-    Axios(`/products/${id}`).then((res) => setSingleCourse(res.data));
+    Axios(`/courses/${id}`).then((res) => {
+      setSingleCourse(res.data)
+      console.log(singleCourse)
+    });
   }, []);
   return (
     <div className={`${darkmode?'dark':'light'}`}>
@@ -22,10 +25,14 @@ const SingleCourseCard = () => {
       <div className="px-5 md:px-24">
         <div className="grid grid-cols-1 order-last  lg:grid-cols-12 lg:order-1 gap-5">
           <div className="col-span-7">
-            <SingleCourseDetailsLeft singleCourse={singleCourse} />
+          {
+            singleCourse.map((single,index)=> <SingleCourseDetailsLeft key={index+1} singleCourse={single}/>)
+          }
           </div>
           <div className="col-span-5 order-first lg:order-2">
-            <SingleCourseCardRight />
+          {
+            singleCourse.map((single,index)=> <SingleCourseCardRight key={index+1} singleCourse={single}/>)
+          }
           </div>
         </div>
       </div>

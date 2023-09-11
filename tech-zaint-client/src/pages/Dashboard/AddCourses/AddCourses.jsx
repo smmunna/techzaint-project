@@ -3,36 +3,23 @@ import PageTitle from "../../../components/PageTitle/PageTitle"
 import Cover from "../../../components/Cover/Cover"
 import { useState } from "react"
 import Axios from "../../../axios/Axios"
+import Swal from "sweetalert2";
 
 const AddCourses = () => {
-    const [categoryChange, setCategoryChange] = useState('technology')
+    const [categoryChange, setCategoryChange] = useState()
     const [ratingChange, setRatingChange] = useState(5)
     const [error, setError] = useState('')
-
-    // working with video links;
-    const [videoLinks, setVideoLinks] = useState([{ title: '', link: '' }]);
-    const handleAddInput = () => {
-        setVideoLinks([...videoLinks, { title: '', link: '' }])
-    }
-
-    const handleInputChange = (index, name, value) => {
-        const newVideoLinks = [...videoLinks];
-        newVideoLinks[index][name] = value;
-        setVideoLinks(newVideoLinks);
-    };
-
-    const handleRemoveInput = (index) => {
-        const newVideoLinks = [...videoLinks];
-        newVideoLinks.splice(index, 1);
-        setVideoLinks(newVideoLinks);
-    };
-
-
+    const [photo, setPhoto] = useState("");
 
     // styling the input label;
     const p = {
         fontWeight: 'bold'
     }
+
+    // photo upload
+    const handlePhotoChange = (e) => {
+        setPhoto(e.target.files[0]);
+    };
 
 
     const handleCourseFormSubmit = (e) => {
@@ -46,8 +33,10 @@ const AddCourses = () => {
         const rating = ratingChange;
         const instructor = form.instructor.value;
         const demo = form.demo.value;
-        const thumbnail = form.thumbnail.files[0]
-
+        const total_time = form.total_time.value;
+        const content_preview = form.content_preview.value;
+        const thumbnail = photo;
+        
         if (isNaN(price)) {
             setError('Price must be  Number eg. 50')
             return
@@ -64,37 +53,52 @@ const AddCourses = () => {
             setError('')
         }
 
-        const reader = new FileReader()
-        reader.onload = (event) => {
-            const thumbnailData = event.target.result;
-            const courseInfo = {
-                title,
-                category,
-                description,
-                price,
-                discount_price,
-                rating,
-                instructor,
-                demo,
-                thumbnail: thumbnailData,
-                course_details: [
-                    { title: title, link: demo }, // Adding the main course title and link
-                    ...videoLinks.map((video) => ({ title: video.title, link: video.link })) //for showing the title and video link as array of object
-                ]
-            }
-
-            // Sent to the server;
-            Axios.post('/courses', { courseInfo }, { headers: { 'Content-Type': 'application/json' } })
-                .then((res) => {
-                    console.log(res.data); // Check the response data from the server
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                });
-
-
+        const courseInfo = {
+            title,
+            category,
+            description,
+            price,
+            discount_price,
+            rating,
+            instructor,
+            demo,
+            total_time,
+            content_preview,
+            thumbnail
         }
-        reader.readAsDataURL(thumbnail)
+
+        const formData = new FormData()
+        formData.append('title', title)
+        formData.append('category', category)
+        formData.append('description', description)
+        formData.append('price', price)
+        formData.append('discount_price', discount_price)
+        formData.append('rating', rating)
+        formData.append('instructor', instructor)
+        formData.append('demo', demo)
+        formData.append('total_time', total_time)
+        formData.append('content_preview', content_preview)
+        formData.append('thumbnail', thumbnail)
+
+        fetch('http://localhost:3000/courses', {
+            method: 'POST',
+            body: formData
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status == 'ok') {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Course added successfully..",
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                    form.reset()
+                }
+            })
+
+
 
 
     }
@@ -107,7 +111,7 @@ const AddCourses = () => {
             <div className="flex justify-center py-4 bgimage">
                 <div>
                     {error && <><p className="py-5 text-lg font-bold text-center text-red-600">{error}</p> <hr className="pb-4" /></>}
-                    <form onSubmit={handleCourseFormSubmit}>
+                    <form onSubmit={handleCourseFormSubmit} encType="multipart/form-data">
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                             <div className="space-y-2">
                                 <div>
@@ -123,7 +127,7 @@ const AddCourses = () => {
 
                                 <div>
                                     <p style={p}>Category: </p>
-                                    <select className=" login-input h-12 w-full" defaultValue={categoryChange} onChange={(e) => setCategoryChange(e.target.value)}>
+                                    <select className=" login-input h-12 w-full" value={categoryChange} onChange={(e) => setCategoryChange(e.target.value)}>
                                         <option disabled>Select Status</option>
                                         <option value={`Languages`}>Languages</option>
                                         <option value={`Frontend`}>Frontend</option>
@@ -187,6 +191,16 @@ const AddCourses = () => {
                                     />
                                 </div>
                                 <div>
+                                    <p style={p}>Total time: </p>
+                                    <input
+                                        className="login-input p-2 w-full md:w-[400px]"
+                                        type="text"
+                                        name="total_time"
+                                        placeholder="time in hours or minutes eg. 5 hours "
+                                        required
+                                    />
+                                </div>
+                                <div>
                                     <p style={p}>Demo Url: </p>
                                     <input
                                         className="login-input p-2 w-full md:w-[400px]"
@@ -197,45 +211,25 @@ const AddCourses = () => {
                                     />
                                 </div>
                                 <div>
-                                    <p style={p}>Thumbnail: </p>
+                                    <p style={p}>Profile Photo: </p>
                                     <input
                                         className="login-input p-2 w-full md:w-[400px]"
                                         type="file"
-                                        accept="image/*"
                                         name="thumbnail"
-                                        placeholder="thumbnail of course. "
-                                        required
+                                        onChange={handlePhotoChange}
                                     />
                                 </div>
 
-                                {/* Video Links From youtube embeded */}
                                 <div>
-                                    <p style={p}>Video Links:</p>
-                                    {videoLinks.map((video, index) => (
-                                        <div key={index}>
-                                            <input
-                                                type="text"
-                                                className="login-input mt-2 p-2 w-full md:w-[350px]"
-                                                placeholder={`Enter Video title ${index + 1}`}
-                                                value={video.title}
-                                                onChange={(event) => handleInputChange(index, 'title', event.target.value)}
-                                            /> <br />
-                                            <input
-                                                type="text"
-                                                className="login-input mt-2 p-2 w-full md:w-[350px]"
-                                                placeholder={`Enter Video link ${index + 1}`}
-                                                value={video.link}
-                                                onChange={(event) => handleInputChange(index, 'link', event.target.value)}
-                                            />
-                                            {index === 0 ? (
-                                                <button type="button" className="btn ml-2 btn-neutral text-lg font-bold" onClick={handleAddInput}>+</button>
-                                            ) : (
-                                                <button type="button" className="btn ml-2 btn-error text-lg font-bold w-12" onClick={() => handleRemoveInput(index)}>-</button>
-                                            )}
-                                        </div>
-                                    ))}
+                                    <p style={p}>Content Preview: </p>
+                                    <textarea rows={5}
+                                        className="login-input p-2 w-full md:w-[400px]"
+                                        type="text"
+                                        name="content_preview"
+                                        placeholder="Write your preview"
+                                        required
+                                    />
                                 </div>
-
 
                             </div>
                         </div>

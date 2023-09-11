@@ -5,7 +5,9 @@ import PaymentTuitorials from "../../PaymentTuitorials/PaymentTuitorials";
 
 const SingleCourseDetailsLeft = ({ singleCourse }) => {
   const { darkmode } = useContext(darkContext);
-  const { title, description, price } = singleCourse;
+  const { title, description, content_preview, instructor } = singleCourse;
+  const contents_preview = content_preview.split('\n');
+
   return (
     <div>
       <div className={`py-12 space-y-8`}>
@@ -14,15 +16,7 @@ const SingleCourseDetailsLeft = ({ singleCourse }) => {
         </div>
         <div>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum at
-            fugiat perferendis ea dolorum minus, distinctio asperiores
-            praesentium autem. Sequi, rerum nesciunt quod debitis non tempora
-            at. Aliquam, non libero. Lorem, ipsum dolor sit amet consectetur
-            adipisicing elit. Voluptatibus vero asperiores pariatur dignissimos
-            nemo rem eius modi fugit, repellat blanditiis. Dignissimos voluptas
-            tenetur magni, maxime porro rem voluptatem odio quam laudantium
-            ratione esse, eum eos praesentium consectetur deleniti unde
-            assumenda!
+            {description}
           </p>
         </div>
         <div className="space-y-5">
@@ -34,8 +28,8 @@ const SingleCourseDetailsLeft = ({ singleCourse }) => {
               <img src={profilepic} width={80} alt="" />
             </div>
             <div>
-              <h3 className="text-lg font-bold">Arifin Rahman</h3>
-              <h3>Works at Newyork</h3>
+              <h3 className="text-lg font-bold">{instructor}</h3>
+              <h3>Works at TechZaint</h3>
             </div>
           </div>
         </div>
@@ -47,16 +41,11 @@ const SingleCourseDetailsLeft = ({ singleCourse }) => {
           </div>
           <div>
             <ol start="1" className="space-y-2">
-              <li>
-                1. Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Distinctio, facere.
-              </li>
-              <li>2. Lorem ipsum dolor sit amet.</li>
-              <li>3. Lorem ipsum dolor sit amet consectetur adipisicing.</li>
-              <li>4. Lorem ipsum dolor sit amet consectetur adipisicing.</li>
-              <li>5. Lorem ipsum dolor sit amet consectetur adipisicing.</li>
-              <li>6. Lorem ipsum dolor sit amet consectetur adipisicing.</li>
-              <li>7. Lorem ipsum dolor sit amet consectetur adipisicing.</li>
+              {
+                contents_preview.map((contents,index)=>(
+                  <li key={index+1}>{index+1}. {contents}</li>
+                ))
+              }
             </ol>
           </div>
         </div>

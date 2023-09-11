@@ -4,13 +4,14 @@ import img2 from "../../../assets/icons/taka.png";
 import img3 from "../../../assets/icons/time.png";
 import img4 from "../../../assets/icons/notes.png";
 
-const SingleCourseCardRight = () => {
+const SingleCourseCardRight = ({singleCourse}) => {
+  const{price,demo,total_time} = singleCourse
   return (
     <div className="py-12 lg:sticky lg:top-20">
       <div className={`space-y-5 border-2  p-4`}>
         <div class="aspect-w-16 aspect-h-9">
           <iframe
-            src="https://www.youtube.com/embed/jOYzbXBi-qk?si=0twgpU55qVlnJeGG"
+            src={demo}
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
@@ -22,7 +23,7 @@ const SingleCourseCardRight = () => {
             <div>
               <img src={img2} width={30} alt="" />
             </div>
-            <div> 500 Taka</div>
+            <div> {price} Taka</div>
           </div>
           <div className="flex gap-2 font-semibold text-lg items-center">
             <div>
@@ -34,7 +35,7 @@ const SingleCourseCardRight = () => {
             <div>
               <img src={img3} width={30} alt="" />
             </div>
-            <div> 5 hours</div>
+            <div> {total_time}</div>
           </div>
           <div className="flex gap-2 font-semibold text-lg">
             <div>

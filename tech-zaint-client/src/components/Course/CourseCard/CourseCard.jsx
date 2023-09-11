@@ -9,7 +9,7 @@ const CourseCard = ({ course }) => {
     <div>
       <div className={`h-full course__card p-4 space-y-5 ${darkmode?'dark':''}`}>
         <div className="flex justify-center">
-          <img src={thumbnail} className="w-[350px] h-[250px]" alt="" />
+          <img src={course.thumbnail} className="w-[350px] h-[250px]" alt="" />
         </div>
         <div className="space-y-2">
           <div>

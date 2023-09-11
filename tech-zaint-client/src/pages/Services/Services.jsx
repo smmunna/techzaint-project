@@ -15,7 +15,9 @@ const Services = () => {
  const{darkmode} = useContext(darkContext);
   //  Fetching the data from the api; https://dummyjson.com
   useEffect(() => {
-    Axios.get("/courses").then((res) => setCourses(res.data));
+    Axios.get("/courses/all").then((res) =>{ 
+      setCourses(res.data)
+    });
   }, []);
   return (
     <div>

@@ -12,23 +12,26 @@ import { darkContext } from "../../../context/darkmode/DarkContext";
 const LearnLanguages = () => {
   const [languages, setLanguages] = useState([]);
   const [changePage, setChangePage] = useState(1);
-  const {darkmode}=useContext(darkContext);
+  const { darkmode } = useContext(darkContext);
 
   useEffect(() => {
-    Axios.get("/courses").then((res) => setLanguages(res.data));
+    Axios.get("/courses/all")
+      .then((res) => {
+        setLanguages(res.data)
+      });
   }, []);
 
-  const perpageItem = Math.round(languages.length) / 3;
+  const perpageItem = (languages.length < 10 ? 30 : Math.round(languages.length)) / 3;
 
   return (
-    <div className={`${darkmode?'dark':'light'}`}>
-      <PageTitle title={`Languages`} />
+    <div className={`${darkmode ? 'dark' : 'light'}`}>
       <Cover title={`Learn Languages`} img={img} />
       <div className="px-5 md:px-24 py-5">
         <HomeTitle title={`Languages Course`} />
         <hr />
         {/* Spinner Inserting */}
         <Spinner item={languages} />
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-4">
           {languages
             .slice(10 * changePage - 10, 10 * changePage)
@@ -36,12 +39,12 @@ const LearnLanguages = () => {
               <CourseCard key={course.id} course={course} />
             ))}
         </div>
+
         <div className="text-center">
           <div className="join">
             <button
-              className={`${darkmode?'':''} join-item btn ${
-                changePage <= 1 ? "btn btn-disabled bg-white" : ""
-              }`}
+              className={`${darkmode ? '' : ''} join-item btn ${changePage <= 1 ? "btn btn-disabled bg-white" : ""
+                }`}
               onClick={() => setChangePage(changePage - 1)}
             >
               Prev
@@ -50,23 +53,22 @@ const LearnLanguages = () => {
               <button
                 key={index + 1}
                 onClick={() => setChangePage(index + 1)}
-                className={`join-item btn btn-md ${
-                  changePage == index + 1 ? "btn-active" : ""
-                }`}
+                className={`join-item btn btn-md ${changePage == index + 1 ? "btn-active" : ""
+                  }`}
               >
                 {index + 1}
               </button>
             ))}
             <button
-              className={`join-item btn ${
-                changePage >= 3 ? "btn btn-disabled" : ""
-              }`}
+              className={`join-item btn ${changePage >= 3 ? "btn btn-disabled" : ""
+                }`}
               onClick={() => setChangePage(changePage + 1)}
             >
               Next
             </button>
           </div>
         </div>
+
       </div>
     </div>
   );
