@@ -15,7 +15,6 @@ const SingleCourseCard = () => {
   useEffect(() => {
     Axios(`/courses/${id}`).then((res) => {
       setSingleCourse(res.data)
-      console.log(singleCourse)
     });
   }, []);
   return (

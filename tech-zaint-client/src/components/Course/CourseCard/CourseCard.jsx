@@ -19,7 +19,7 @@ const CourseCard = ({ course }) => {
             <p>{description.slice(0, 30)}...</p>
           </div>
           <div className="course__priceCard">
-            <h3>Price: {price}$</h3>
+            <h3>Price: {price} <span className="text-3xl">৳</span></h3>
           </div>
           <div>
             <CourseEnrollBtn id={id} />
