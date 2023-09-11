@@ -9,14 +9,14 @@ const AddCourses = () => {
     const [error, setError] = useState('')
 
     // working with video links;
-    const [videoLinks, setVideoLinks] = useState(['']);
+    const [videoLinks, setVideoLinks] = useState([{ title: '', link: '' }]);
     const handleAddInput = () => {
-        setVideoLinks([...videoLinks, ''])
+        setVideoLinks([...videoLinks, { title: '', link: '' }])
     }
 
-    const handleInputChange = (index, value) => {
+    const handleInputChange = (index, name, value) => {
         const newVideoLinks = [...videoLinks];
-        newVideoLinks[index] = value;
+        newVideoLinks[index][name] = value;
         setVideoLinks(newVideoLinks);
     };
 
@@ -191,17 +191,24 @@ const AddCourses = () => {
                                     />
                                 </div>
 
-                                {/* Video Links */}
+                                {/* Video Links From youtube embeded */}
                                 <div>
                                     <p style={p}>Video Links:</p>
-                                    {videoLinks.map((link, index) => (
+                                    {videoLinks.map((video, index) => (
                                         <div key={index}>
                                             <input
                                                 type="text"
                                                 className="login-input mt-2 p-2 w-full md:w-[350px]"
-                                                placeholder="Enter video link"
-                                                value={link}
-                                                onChange={(event) => handleInputChange(index, event.target.value)}
+                                                placeholder={`Enter Video title ${index + 1}`}
+                                                value={video.title}
+                                                onChange={(event) => handleInputChange(index, 'title', event.target.value)}
+                                            /> <br />
+                                            <input
+                                                type="text"
+                                                className="login-input mt-2 p-2 w-full md:w-[350px]"
+                                                placeholder={`Enter Video link ${index + 1}`}
+                                                value={video.link}
+                                                onChange={(event) => handleInputChange(index, 'link', event.target.value)}
                                             />
                                             {index === 0 ? (
                                                 <button type="button" className="btn ml-2 btn-neutral text-lg font-bold" onClick={handleAddInput}>+</button>
@@ -226,7 +233,6 @@ const AddCourses = () => {
                 </div>
 
             </div>
-
         </div>
     );
 }
