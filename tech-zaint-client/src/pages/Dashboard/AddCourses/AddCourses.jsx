@@ -83,7 +83,7 @@ const AddCourses = () => {
                 ]
             }
 
-            // add to the server;
+            // Sent to the server;
             Axios.post('/courses', { courseInfo }, { headers: { 'Content-Type': 'application/json' } })
                 .then((res) => {
                     console.log(res.data); // Check the response data from the server
