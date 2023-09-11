@@ -8,14 +8,14 @@ import ExploreMoreBtn from "../../components/ExploreMoreBtn/ExploreMoreBtn";
 import ServicesList from "../../components/ServicesList/ServicesList";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import Spinner from "../../components/Spinner/Spinner";
-import {darkContext} from "../../context/darkmode/DarkContext"
+import { darkContext } from "../../context/darkmode/DarkContext"
 
 const Services = () => {
   const [courses, setCourses] = useState([]);
- const{darkmode} = useContext(darkContext);
+  const { darkmode } = useContext(darkContext);
   //  Fetching the data from the api; https://dummyjson.com
   useEffect(() => {
-    Axios.get("/courses/all").then((res) =>{ 
+    Axios.get("/courses/all").then((res) => {
       setCourses(res.data)
     });
   }, []);
@@ -23,7 +23,7 @@ const Services = () => {
     <div>
       <PageTitle title={`Services`} />
       <Cover title={`Explore our Services`} img={img} />
-      <div className={`px-5 lg:px-20 ${darkmode?'dark':'light'}`}>
+      <div className={`px-5 lg:px-20 ${darkmode ? 'dark' : 'light'}`}>
         <div>
           <h3 className="text-3xl py-3 font-bold">Course Category</h3>
           <hr />
