@@ -143,7 +143,7 @@ const Register = () => {
           </div>
           <hr className="my-4" />
           <form
-            action="http://localhost:3000/user"
+            //TODO: action="http://localhost:3000/user" 
             method="POST"
             onSubmit={handleRegForm}
             encType="multipart/form-data"

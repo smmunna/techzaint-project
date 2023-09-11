@@ -55,7 +55,7 @@ const Dashboard = () => {
                                 <div>
                                     <ActivityList name={`Home`} link={`/`} />
                                     <ActivityList name={`Dashboard Home`} link={`/dashboard`} />
-                                    <ActivityList name={`Add Course`} link={`/`} />
+                                    <ActivityList name={`Add Course`} link={`/dashboard/add-courses`} />
                                     <ActivityList name={`Add Project`} link={`/`} />
                                     <ActivityList name={`Users List`} link={`/`} />
                                     <ActivityList name={`Course List`} link={`/`} />

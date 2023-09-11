@@ -13,6 +13,7 @@ import Profile from "../pages/Profile/Profile";
 import Dashboard from "../layouts/dashboard/Dashboard";
 import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
 import DashboardHome from "../pages/Dashboard/Home/Home"
+import AddCourses from "../pages/Dashboard/AddCourses/AddCourses";
 
 const router = createBrowserRouter([
     {
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
             {
                 path: '',
                 element: <PrivateRoutes><DashboardHome /></PrivateRoutes>
+            },
+            {
+                path:'add-courses',
+                element:<PrivateRoutes><AddCourses/></PrivateRoutes>
             }
         ]
     },

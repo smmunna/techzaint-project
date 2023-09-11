@@ -8,3 +8,9 @@
 .explore__moreBtn{
     text-align: right;
 }
+
+/* AddCourses.jsx */
+.bgimage{
+    background-image: url('./assets/cover/cover5.png');
+    
+}
