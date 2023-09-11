@@ -2,6 +2,7 @@ import img from "../../../assets/cover/cover1.jpg"
 import PageTitle from "../../../components/PageTitle/PageTitle"
 import Cover from "../../../components/Cover/Cover"
 import { useState } from "react"
+import Axios from "../../../axios/Axios"
 
 const AddCourses = () => {
     const [categoryChange, setCategoryChange] = useState('technology')
@@ -48,7 +49,11 @@ const AddCourses = () => {
         const thumbnail = form.thumbnail.files[0]
 
         if (isNaN(price)) {
-            setError('Price must be integer Number eg. 50')
+            setError('Price must be  Number eg. 50')
+            return
+        }
+        if (isNaN(discount_price)) {
+            setError('Price must be Number eg. 50')
             return
         }
         else if (Math.round((thumbnail.size / 1024)) > 150) {
@@ -72,9 +77,21 @@ const AddCourses = () => {
                 instructor,
                 demo,
                 thumbnail: thumbnailData,
-                videoLinks
+                course_details: [
+                    { title: title, link: demo }, // Adding the main course title and link
+                    ...videoLinks.map((video) => ({ title: video.title, link: video.link })) //for showing the title and video link as array of object
+                ]
             }
-            console.log(courseInfo)
+
+            // add to the server;
+            Axios.post('/courses', { courseInfo }, { headers: { 'Content-Type': 'application/json' } })
+                .then((res) => {
+                    console.log(res.data); // Check the response data from the server
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+
 
         }
         reader.readAsDataURL(thumbnail)
