@@ -21,13 +21,15 @@ const LearnLanguages = () => {
       });
   }, []);
 
+
+
   const perpageItem = (languages.length < 10 ? 30 : Math.round(languages.length)) / 3;
 
   return (
     <div className={`${darkmode ? 'dark' : 'light'}`}>
-      <Cover title={`Learn Languages`} img={img} />
+      <Cover title={`Learn Technologies`} img={img} />
       <div className="px-5 md:px-24 py-5">
-        <HomeTitle title={`Languages Course`} />
+        <HomeTitle title={`All Services`} />
         <hr />
         {/* Spinner Inserting */}
         <Spinner item={languages} />

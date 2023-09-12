@@ -9,7 +9,7 @@ const SingleCourseCardRight = ({singleCourse}) => {
   return (
     <div className="py-12 lg:sticky lg:top-20">
       <div className={`space-y-5 border-2  p-4`}>
-        <div class="aspect-w-16 aspect-h-9">
+        <div className="aspect-w-16 aspect-h-9">
           <iframe
             src={demo}
             frameborder="0"

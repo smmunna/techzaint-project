@@ -12,13 +12,25 @@ import { darkContext } from "../../context/darkmode/DarkContext"
 
 const Services = () => {
   const [courses, setCourses] = useState([]);
+  const [languages, setLanguages] = useState([]);
+  const [backend, setBackend] = useState([]);
   const { darkmode } = useContext(darkContext);
-  //  Fetching the data from the api; https://dummyjson.com
   useEffect(() => {
     Axios.get("/courses/all").then((res) => {
       setCourses(res.data)
     });
   }, []);
+
+  useEffect(() => {
+    const languageFilter = courses.filter((languages, index) => languages.category == 'Languages')
+    setLanguages(languageFilter)
+  }, [courses])
+
+  useEffect(() => {
+    const backendFilter = courses.filter((backends, index) => backends.category == 'Backend')
+    setBackend(backendFilter)
+  }, [courses])
+
   return (
     <div>
       <PageTitle title={`Services`} />
@@ -36,9 +48,78 @@ const Services = () => {
           </div>
         </div>
         <hr />
+
         {/* Courses List */}
         <div className="py-4">
-          <HomeTitle title={`Learn Languages`} />
+          <HomeTitle title={`Learn Programming Languages`} />
+        </div>
+
+        <div>
+          {/* Loading Spinner */}
+          <Spinner item={courses} />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-4">
+            {languages.length > 3 ? (
+              <>
+                {courses.slice(0, 3).map((course) => (
+                  <CourseCard key={course.id} course={course} />
+                ))}
+              </>
+            ) : (
+              <>
+                {languages.map((course) => (
+                  <CourseCard key={course.id} course={course} />
+                ))}
+              </>
+            )}
+          </div>
+          {languages.length > 3 && (
+            <>
+              <div className="pb-5">
+                <ExploreMoreBtn link={`/learn-languages`} />
+              </div>
+            </>
+          )}
+        </div>
+
+
+        {/* Learn Backend Technology */}
+        <div className="py-4">
+          <HomeTitle title={`Learn Backend Technology`} />
+        </div>
+
+        <div>
+          {/* Loading Spinner */}
+          <Spinner item={courses} />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-4">
+            {backend.length > 3 ? (
+              <>
+                {backend.slice(0, 3).map((course) => (
+                  <CourseCard key={course.id} course={course} />
+                ))}
+              </>
+            ) : (
+              <>
+                {backend.map((course) => (
+                  <CourseCard key={course.id} course={course} />
+                ))}
+              </>
+            )}
+          </div>
+          {backend.length > 3 && (
+            <>
+              <div className="pb-5">
+                <ExploreMoreBtn link={`/learn-languages`} />
+              </div>
+            </>
+          )}
+        </div>
+
+
+        {/* Full Stack Web Development */}
+        <div className="py-4">
+          <HomeTitle title={`Full Stack Web Development`} />
         </div>
 
         <div>
@@ -69,9 +150,8 @@ const Services = () => {
           )}
         </div>
 
-        {/* Web Design Courses */}
 
-        {/* Full Stack Web Development */}
+
       </div>
     </div>
   );
