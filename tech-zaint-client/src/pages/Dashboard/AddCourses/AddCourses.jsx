@@ -16,7 +16,7 @@ const AddCourses = () => {
         fontWeight: 'bold'
     }
 
-    const handleCategoryChange = (e)=>{
+    const handleCategoryChange = (e) => {
         setCategoryChange(e.target.value)
     }
 
@@ -40,7 +40,7 @@ const AddCourses = () => {
         const total_time = form.total_time.value;
         const content_preview = form.content_preview.value;
         const thumbnail = photo;
-        
+
         if (isNaN(price)) {
             setError('Price must be  Number eg. 50')
             return
@@ -86,12 +86,13 @@ const AddCourses = () => {
         formData.append('content_preview', content_preview)
         formData.append('thumbnail', thumbnail)
 
-        fetch('http://localhost:3000/courses', {
+        fetch('http://localhost:8000/api/add-course', { //TODO: change url with live site;
             method: 'POST',
             body: formData
         })
             .then(res => res.json())
             .then(data => {
+                // console.log(data)
                 if (data.status == 'ok') {
                     Swal.fire({
                         position: "top-end",

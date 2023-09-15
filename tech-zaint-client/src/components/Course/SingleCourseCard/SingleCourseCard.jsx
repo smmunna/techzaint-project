@@ -7,31 +7,41 @@ import SingleCourseDetailsLeft from "./SingleCourseDetailsLeft";
 import SingleCourseCardRight from "./SingleCourseCardRight";
 import img from "../../../assets/cover/cover1.jpg";
 import { darkContext } from "../../../context/darkmode/DarkContext";
+import axios from "axios";
 
 const SingleCourseCard = () => {
   const [singleCourse, setSingleCourse] = useState([]);
-  const{darkmode}=useContext(darkContext)
+  const { darkmode } = useContext(darkContext)
   const { id } = useParams();
   useEffect(() => {
-    Axios(`/courses/${id}`).then((res) => {
-      setSingleCourse(res.data)
+    axios.get(`http://localhost:8000/api/course/${id}`).then((res) => { //TODO: change url with live site;
+      setSingleCourse(res.data.course)
+      // console.log(res.data.course)
     });
   }, []);
   return (
-    <div className={`${darkmode?'dark':'light'}`}>
+    <div className={`${darkmode ? 'dark' : 'light'}`}>
       <PageTitle title={`Single Course`} />
       <Cover title={`Course Details`} img={img} />
       <div className="px-5 md:px-24">
         <div className="grid grid-cols-1 order-last  lg:grid-cols-12 lg:order-1 gap-5">
-          <div className="col-span-7">
-          {
-            singleCourse.map((single,index)=> <SingleCourseDetailsLeft key={index+1} singleCourse={single}/>)
-          }
+          <div className=" lg:col-span-7">
+
+            {/* singleCourse.map((single,index)=> <SingleCourseDetailsLeft key={index+1} singleCourse={single}/>) */}
+            {
+              singleCourse && <><SingleCourseDetailsLeft singleCourse={singleCourse} /></>
+            }
+
           </div>
-          <div className="col-span-5 order-first lg:order-2">
-          {
+          <div className=" lg:col-span-5 order-first lg:order-2">
+            {/* {
             singleCourse.map((single,index)=> <SingleCourseCardRight key={index+1} singleCourse={single}/>)
-          }
+          } */}
+
+            {
+              singleCourse && <><SingleCourseCardRight singleCourse={singleCourse} /></>
+            }
+
           </div>
         </div>
       </div>

@@ -9,8 +9,6 @@ import cartIcon from "../../assets/icons/cart.png";
 import { useContext, useEffect, useRef, useState } from "react";
 import { darkContext } from "../../context/darkmode/DarkContext";
 import { AuthContext } from "../../provider/AuthProvider";
-import Axios from "../../axios/Axios";
-import AxiosSecure from "../../axios/AxiosSecure";
 
 const Header = () => {
   const [menuIcon, setMenuicon] = useState(false);
@@ -24,23 +22,21 @@ const Header = () => {
   useEffect(() => {
     const accessToken = localStorage.getItem('access-token');
 
-    // Define the headers object with the Authorization header
     const headers = {
       Authorization: `Bearer ${accessToken}`, // Assuming it's a Bearer token
       'Content-Type': 'application/json',
       Accept:'application/json'
-       // You can adjust this based on your API requirements
     };
 
     // Make the fetch request with the headers
-    fetch(`http://localhost:8000/api/user-details/${user?.email}`, {
+    fetch(`http://localhost:8000/api/user-details/${user?.email}`, { //TODO: change url with live site;
       method: 'GET',
       headers: headers, // Pass the headers object here
     })
       .then((res) => res.json())
       .then((result) => {
         setUserdata(result.data);
-        console.log(result)
+        // console.log(result)
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -101,7 +97,7 @@ const Header = () => {
         <Link to="/services">Services</Link>
       </li>
       <li>
-        <Link to="/products">Products</Link>
+        <Link to="/learn-languages">Products</Link>
       </li>
       <li>
         <Link to="/courses">Courses</Link>

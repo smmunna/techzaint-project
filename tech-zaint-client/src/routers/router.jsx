@@ -14,6 +14,7 @@ import Dashboard from "../layouts/dashboard/Dashboard";
 import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
 import DashboardHome from "../pages/Dashboard/Home/Home"
 import AddCourses from "../pages/Dashboard/AddCourses/AddCourses";
+import CourseList from "../pages/Dashboard/CourseList/CourseList";
 
 const router = createBrowserRouter([
     {
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
             {
                 path:'add-courses',
                 element:<PrivateRoutes><AddCourses/></PrivateRoutes>
+            },
+            {
+                path:'course-list',
+                element:<PrivateRoutes><CourseList/></PrivateRoutes>
             }
         ]
     },

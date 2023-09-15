@@ -27,7 +27,7 @@ const Profile = () => {
     };
 
     // Make the fetch request with the headers
-    fetch(`http://localhost:8000/api/user-details/${user?.email}`, {
+    fetch(`http://localhost:8000/api/user-details/${user?.email}`, { //TODO: change url with live site;
       method: 'GET',
       headers: headers, // Pass the headers object here
     })

@@ -4,8 +4,8 @@ import img2 from "../../../assets/icons/taka.png";
 import img3 from "../../../assets/icons/time.png";
 import img4 from "../../../assets/icons/notes.png";
 
-const SingleCourseCardRight = ({singleCourse}) => {
-  const{price,demo,total_time,status} = singleCourse
+const SingleCourseCardRight = ({ singleCourse }) => {
+  const { price, demo, total_time, status } = singleCourse
   return (
     <div className="py-12 lg:sticky lg:top-20">
       <div className={`space-y-5 border-2  p-4`}>
@@ -14,22 +14,22 @@ const SingleCourseCardRight = ({singleCourse}) => {
             src={demo}
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
+            allowFullScreen
           ></iframe>
         </div>
 
         <div className=" space-y-2">
-          <div className="flex gap-2 font-semibold text-lg">
+          <div className="flex gap-2 items-center font-semibold text-lg">
             <div>
               <img src={img2} width={30} alt="" />
             </div>
-            <div> {price} Taka</div>
+            <div> {status == 'off' ? <><p className="bg-green-600 p-4 text-white">Free for now..</p></> : <>{price} BDT</>}</div>
           </div>
           <div className="flex gap-2 font-semibold text-lg items-center">
             <div>
               <img src={img1} width={30} alt="" />
             </div>
-            <div> 100+ students</div>
+            <div> 100+ Students</div>
           </div>
           <div className="flex gap-2 font-semibold text-lg">
             <div>
@@ -41,14 +41,12 @@ const SingleCourseCardRight = ({singleCourse}) => {
             <div>
               <img src={img4} width={30} alt="" />
             </div>
-            <div> 5</div>
+            <div> 5 Notes</div>
           </div>
-          <div className="flex gap-2 font-semibold text-lg">
-            <p className="text-red-300">Development in progress, Videos are collected from youtube for testing.. !</p>
-          </div>
+
           <div className="flex pt-5 font-semibold text-lg justify-center">
             <div>
-                <button className="btn btn-accent w-96" disabled><Link to="#">Enroll Now</Link></button>
+              <button className="btn btn-accent w-52 lg:w-96"><Link to="#">Enroll Now</Link></button>
             </div>
           </div>
         </div>

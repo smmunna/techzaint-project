@@ -2,11 +2,23 @@ import { useContext } from "react";
 import { darkContext } from "../../../context/darkmode/DarkContext";
 import profilepic from "../../../assets/icons/user.png";
 import PaymentTuitorials from "../../PaymentTuitorials/PaymentTuitorials";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const SingleCourseDetailsLeft = ({ singleCourse }) => {
   const { darkmode } = useContext(darkContext);
   const { title, description, content_preview, instructor } = singleCourse;
-  const contents_preview = content_preview.split('\n');
+  const [mycontentList, setMyContenList] = useState([])
+
+  // We need to check whether string or not other wise we can not split it.
+  useEffect(() => {
+
+    setTimeout(() => {
+      const contents_previews = content_preview.split('\n');
+      setMyContenList(contents_previews);
+    }, 2000)
+
+  }, [singleCourse])
 
   return (
     <div>
@@ -42,8 +54,8 @@ const SingleCourseDetailsLeft = ({ singleCourse }) => {
           <div>
             <ol start="1" className="space-y-2">
               {
-                contents_preview.map((contents,index)=>(
-                  <li key={index+1}>{index+1}. {contents}</li>
+                mycontentList.map((contents, index) => (
+                  <li key={index + 1}>{index + 1}. {contents}</li>
                 ))
               }
             </ol>

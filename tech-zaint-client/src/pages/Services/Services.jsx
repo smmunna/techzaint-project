@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import img from "../../assets/banner/banner2.jpg";
 import Cover from "../../components/Cover/Cover";
-import Axios from "../../axios/Axios";
 import CourseCard from "../../components/Course/CourseCard/CourseCard";
 import HomeTitle from "../../components/HomeTitle/HomeTitle";
 import ExploreMoreBtn from "../../components/ExploreMoreBtn/ExploreMoreBtn";
@@ -9,6 +8,7 @@ import ServicesList from "../../components/ServicesList/ServicesList";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import Spinner from "../../components/Spinner/Spinner";
 import { darkContext } from "../../context/darkmode/DarkContext"
+import axios from "axios";
 
 const Services = () => {
   const [courses, setCourses] = useState([]);
@@ -18,8 +18,8 @@ const Services = () => {
   const [projects, setProjects] = useState([]);
   const { darkmode } = useContext(darkContext);
   useEffect(() => {
-    Axios.get("/courses/all").then((res) => {
-      setCourses(res.data)
+    axios.get("http://localhost:8000/api/course").then((res) => { //TODO: change url with live site;
+      setCourses(res.data.course)
     });
   }, []);
 
@@ -62,6 +62,8 @@ const Services = () => {
         <hr />
 
         {/* Courses List */}
+        <Spinner item={languages} />
+
         {
           languages.length > 0 && <>
 
@@ -71,7 +73,6 @@ const Services = () => {
 
             <div>
               {/* Loading Spinner */}
-              <Spinner item={courses} />
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-4">
                 {languages.length > 3 ? (

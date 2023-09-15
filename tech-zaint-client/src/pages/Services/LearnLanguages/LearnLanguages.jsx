@@ -8,6 +8,7 @@ import Axios from "../../../axios/Axios";
 import CourseCard from "../../../components/Course/CourseCard/CourseCard";
 import Spinner from "../../../components/Spinner/Spinner";
 import { darkContext } from "../../../context/darkmode/DarkContext";
+import axios from "axios";
 
 const LearnLanguages = () => {
   const [languages, setLanguages] = useState([]);
@@ -15,9 +16,10 @@ const LearnLanguages = () => {
   const { darkmode } = useContext(darkContext);
 
   useEffect(() => {
-    Axios.get("/courses/all")
+    axios.get("http://localhost:8000/api/course")  //TODO: change url with live site;
       .then((res) => {
-        setLanguages(res.data)
+        setLanguages(res.data.course)
+        // console.log(res.data.course)
       });
   }, []);
 

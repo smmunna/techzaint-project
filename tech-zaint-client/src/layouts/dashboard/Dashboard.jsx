@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../provider/AuthProvider';
-import Axios from '../../axios/Axios';
 import ActivityList from '../../components/Dashboard/ActivityList/ActivityList';
 import Open from "../../assets/icons/open.png";
+import axios from 'axios';
 
 const Dashboard = () => {
     const { user, logOut } = useContext(AuthContext)
@@ -11,9 +11,19 @@ const Dashboard = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        Axios.get(`/user/user-role?email=${user.email}`)
+        const accessToken = localStorage.getItem('access-token');
+        const headers = {
+            Authorization: `Bearer ${accessToken}`, // Assuming it's a Bearer token
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
+        };
+
+        axios.get(`http://localhost:8000/api/role/${user.email}`,{ //TODO: change url with live site;
+            headers:headers
+        })
             .then(res => {
-                setUserRole(res.data)
+                setUserRole(res.data.role)
+                // console.log(res.data.role)
             })
     }, [])
 
@@ -47,19 +57,19 @@ const Dashboard = () => {
                         {/* For Admin Activity */}
                         <div>
                             <div className={`bg-orange-200 p-4`}>
-                                <h3 className='font-serif font-semibold text-2xl'>TechZaint | {userRole.role == 'admin' ? <span className='bg-red-500 p-2'>Admin</span> : <span className='bg-red-500 p-2'>User</span>} </h3>
+                                <h3 className='font-serif font-semibold text-2xl'>TechZaint | {userRole == 'admin' ? <span className='bg-red-500 p-2'>Admin</span> : <span className='bg-red-500 p-2'>User</span>} </h3>
                             </div>
                         </div>
 
                         {
-                            userRole.role == 'admin' && <>
+                            userRole == 'admin' && <>
                                 <div>
                                     <ActivityList name={`Home`} link={`/`} />
                                     <ActivityList name={`Dashboard Home`} link={`/dashboard`} />
                                     <ActivityList name={`Add Course`} link={`/dashboard/add-courses`} />
+                                    <ActivityList name={`Course List`} link={`/dashboard/course-list`} />
                                     <ActivityList name={`Add Project`} link={`/`} />
                                     <ActivityList name={`Users List`} link={`/`} />
-                                    <ActivityList name={`Course List`} link={`/`} />
                                     <ActivityList name={`Orders List`} link={`/`} />
                                     <li className='border-b-4 border-b-yellow-400 p-2 bg-red-500 text-yellow-50' onClick={handleLogout}><h3>Logout</h3></li>
                                 </div>
@@ -68,7 +78,7 @@ const Dashboard = () => {
                         {/* For user Activity */}
 
                         {
-                            userRole.role == 'user' && <>
+                            userRole == 'user' && <>
                                 <div>
                                     <ActivityList name={`Home`} link={`/`} />
                                     <ActivityList name={`Dashboard Home`} link={`/dashboard`} />
