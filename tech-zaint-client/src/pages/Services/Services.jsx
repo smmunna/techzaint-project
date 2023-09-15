@@ -14,6 +14,8 @@ const Services = () => {
   const [courses, setCourses] = useState([]);
   const [languages, setLanguages] = useState([]);
   const [backend, setBackend] = useState([]);
+  const [frontend, setFrontend] = useState([]);
+  const [projects, setProjects] = useState([]);
   const { darkmode } = useContext(darkContext);
   useEffect(() => {
     Axios.get("/courses/all").then((res) => {
@@ -22,13 +24,23 @@ const Services = () => {
   }, []);
 
   useEffect(() => {
-    const languageFilter = courses.filter((languages, index) => languages.category == 'Languages')
+    const languageFilter = courses.filter((languages, index) => languages.category == 'languages')
     setLanguages(languageFilter)
   }, [courses])
 
   useEffect(() => {
-    const backendFilter = courses.filter((backends, index) => backends.category == 'Backend')
+    const backendFilter = courses.filter((backends, index) => backends.category == 'backend')
     setBackend(backendFilter)
+  }, [courses])
+
+  useEffect(() => {
+    const frontendFilter = courses.filter((frontend, index) => frontend.category == 'frontend')
+    setFrontend(frontendFilter)
+  }, [courses])
+
+  useEffect(() => {
+    const projectsFilter = courses.filter((projects, index) => projects.category == 'projects')
+    setProjects(projectsFilter)
   }, [courses])
 
   return (
@@ -50,105 +62,161 @@ const Services = () => {
         <hr />
 
         {/* Courses List */}
-        <div className="py-4">
-          <HomeTitle title={`Learn Programming Languages`} />
-        </div>
+        {
+          languages.length > 0 && <>
 
-        <div>
-          {/* Loading Spinner */}
-          <Spinner item={courses} />
+            <div className="py-4">
+              <HomeTitle title={`Learn Programming Languages`} />
+            </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-4">
-            {languages.length > 3 ? (
-              <>
-                {courses.slice(0, 3).map((course) => (
-                  <CourseCard key={course.id} course={course} />
-                ))}
-              </>
-            ) : (
-              <>
-                {languages.map((course) => (
-                  <CourseCard key={course.id} course={course} />
-                ))}
-              </>
-            )}
-          </div>
-          {languages.length > 3 && (
-            <>
-              <div className="pb-5">
-                <ExploreMoreBtn link={`/learn-languages`} />
+            <div>
+              {/* Loading Spinner */}
+              <Spinner item={courses} />
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-4">
+                {languages.length > 3 ? (
+                  <>
+                    {courses.slice(0, 3).map((course) => (
+                      <CourseCard key={course.id} course={course} />
+                    ))}
+                  </>
+                ) : (
+                  <>
+                    {languages.map((course) => (
+                      <CourseCard key={course.id} course={course} />
+                    ))}
+                  </>
+                )}
               </div>
-            </>
-          )}
-        </div>
+              {languages.length > 3 && (
+                <>
+                  <div className="pb-5">
+                    <ExploreMoreBtn link={`/learn-languages`} />
+                  </div>
+                </>
+              )}
+            </div>
+
+          </>
+        }
+
+
+        {/* Learn FrontEnd Technology */}
+
+        {
+          frontend.length > 0 && <>
+            <div className="py-4">
+              <HomeTitle title={`Learn FrontEnd Technology`} />
+            </div>
+
+            <div>
+              {/* Loading Spinner */}
+              <Spinner item={courses} />
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-4">
+                {frontend.length > 3 ? (
+                  <>
+                    {frontend.slice(0, 3).map((course) => (
+                      <CourseCard key={course.id} course={course} />
+                    ))}
+                  </>
+                ) : (
+                  <>
+                    {frontend.map((course) => (
+                      <CourseCard key={course.id} course={course} />
+                    ))}
+                  </>
+                )}
+              </div>
+              {frontend.length > 3 && (
+                <>
+                  <div className="pb-5">
+                    <ExploreMoreBtn link={`/learn-languages`} />
+                  </div>
+                </>
+              )}
+            </div>
+          </>
+        }
 
 
         {/* Learn Backend Technology */}
-        <div className="py-4">
-          <HomeTitle title={`Learn Backend Technology`} />
-        </div>
 
-        <div>
-          {/* Loading Spinner */}
-          <Spinner item={courses} />
+        {
+          backend.length > 0 && <>
+            <div className="py-4">
+              <HomeTitle title={`Learn Backend Technology`} />
+            </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-4">
-            {backend.length > 3 ? (
-              <>
-                {backend.slice(0, 3).map((course) => (
-                  <CourseCard key={course.id} course={course} />
-                ))}
-              </>
-            ) : (
-              <>
-                {backend.map((course) => (
-                  <CourseCard key={course.id} course={course} />
-                ))}
-              </>
-            )}
-          </div>
-          {backend.length > 3 && (
-            <>
-              <div className="pb-5">
-                <ExploreMoreBtn link={`/learn-languages`} />
+            <div>
+              {/* Loading Spinner */}
+              <Spinner item={courses} />
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-4">
+                {backend.length > 3 ? (
+                  <>
+                    {backend.slice(0, 3).map((course) => (
+                      <CourseCard key={course.id} course={course} />
+                    ))}
+                  </>
+                ) : (
+                  <>
+                    {backend.map((course) => (
+                      <CourseCard key={course.id} course={course} />
+                    ))}
+                  </>
+                )}
               </div>
-            </>
-          )}
-        </div>
+              {backend.length > 3 && (
+                <>
+                  <div className="pb-5">
+                    <ExploreMoreBtn link={`/learn-languages`} />
+                  </div>
+                </>
+              )}
+            </div>
+          </>
+        }
 
 
-        {/* Full Stack Web Development */}
-        <div className="py-4">
-          <HomeTitle title={`Full Stack Web Development`} />
-        </div>
 
-        <div>
-          {/* Loading Spinner */}
-          <Spinner item={courses} />
+        {/* Project Section */}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-4">
-            {courses.length > 3 ? (
-              <>
-                {courses.slice(0, 3).map((course) => (
-                  <CourseCard key={course.id} course={course} />
-                ))}
-              </>
-            ) : (
-              <>
-                {courses.map((course) => (
-                  <CourseCard key={course.id} course={course} />
-                ))}
-              </>
-            )}
-          </div>
-          {courses.length > 3 && (
-            <>
-              <div className="pb-5">
-                <ExploreMoreBtn link={`/learn-languages`} />
+        {
+          projects.length > 0 && <>
+            <div className="py-4">
+              <HomeTitle title={`Choose your Project`} />
+            </div>
+
+            <div>
+              {/* Loading Spinner */}
+              <Spinner item={courses} />
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-4">
+                {projects.length > 3 ? (
+                  <>
+                    {projects.slice(0, 3).map((course) => (
+                      <CourseCard key={course.id} course={course} />
+                    ))}
+                  </>
+                ) : (
+                  <>
+                    {projects.map((course) => (
+                      <CourseCard key={course.id} course={course} />
+                    ))}
+                  </>
+                )}
               </div>
-            </>
-          )}
-        </div>
+              {projects.length > 3 && (
+                <>
+                  <div className="pb-5">
+                    <ExploreMoreBtn link={`/learn-languages`} />
+                  </div>
+                </>
+              )}
+            </div>
+          </>
+        }
 
 
 

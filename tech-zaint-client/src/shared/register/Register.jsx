@@ -75,6 +75,21 @@ const Register = () => {
     }
     setError("");
 
+    const userInfo = {
+      name,
+      email,
+      confirmpass,
+      dob,
+      usergender,
+      userphone,
+      userphoto,
+      presentaddress,
+      permanentaddress,
+      profession,
+      instituition
+    }
+
+    // console.log(userInfo)
     // Submitting the form;
     const formData = new FormData();
     formData.append("name", name);
@@ -89,6 +104,13 @@ const Register = () => {
     formData.append("instituition", instituition);
     formData.append("photo", userphoto); // Append the uploaded file
 
+    // fetch(`http://localhost:8000/api/register`,{
+    //   method:'POST',
+    //   body: formData
+    // })
+    // .then(res=>res.json())
+    // .then(data=>console.log(data))
+
     // Send the FormData object using fetch
     createUser(email, confirmpass)
       .then((result) => {
@@ -96,7 +118,7 @@ const Register = () => {
         if (user) {
           updateUser(user, name)
             .then(() => {
-              fetch(`http://localhost:3000/user`, {
+              fetch(`http://localhost:8000/api/register`, {
                 method: "POST",
                 body: formData, // Use the FormData object as the body
               })

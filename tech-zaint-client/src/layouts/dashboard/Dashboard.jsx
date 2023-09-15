@@ -3,6 +3,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../provider/AuthProvider';
 import Axios from '../../axios/Axios';
 import ActivityList from '../../components/Dashboard/ActivityList/ActivityList';
+import Open from "../../assets/icons/open.png";
 
 const Dashboard = () => {
     const { user, logOut } = useContext(AuthContext)
@@ -36,7 +37,7 @@ const Dashboard = () => {
                 <div className="drawer-content">
                     {/* Page content here */}
                     <Outlet />
-                    <label htmlFor="my-drawer" className="btn btn-primary drawer-button absolute top-5 left-5">Open drawer</label>
+                    <label htmlFor="my-drawer" className="btn btn-accent drawer-button absolute top-5 left-5">Open <img src={Open} width={30} alt="" /></label>
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="my-drawer" className="drawer-overlay"></label>

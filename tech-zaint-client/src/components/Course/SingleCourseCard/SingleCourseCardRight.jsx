@@ -5,7 +5,7 @@ import img3 from "../../../assets/icons/time.png";
 import img4 from "../../../assets/icons/notes.png";
 
 const SingleCourseCardRight = ({singleCourse}) => {
-  const{price,demo,total_time} = singleCourse
+  const{price,demo,total_time,status} = singleCourse
   return (
     <div className="py-12 lg:sticky lg:top-20">
       <div className={`space-y-5 border-2  p-4`}>
@@ -43,11 +43,12 @@ const SingleCourseCardRight = ({singleCourse}) => {
             </div>
             <div> 5</div>
           </div>
+          <div className="flex gap-2 font-semibold text-lg">
+            <p className="text-red-300">Development in progress, Videos are collected from youtube for testing.. !</p>
+          </div>
           <div className="flex pt-5 font-semibold text-lg justify-center">
             <div>
-              <Link to="#">
-                <button className="btn btn-accent w-96">Enroll Now</button>
-              </Link>
+                <button className="btn btn-accent w-96" disabled><Link to="#">Enroll Now</Link></button>
             </div>
           </div>
         </div>

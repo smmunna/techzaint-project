@@ -36,7 +36,9 @@ const Login = () => {
             showConfirmButton: false,
             timer: 1500,
           });
-          navigate(from, { replace: true });
+          setTimeout(() => {
+            navigate(from, { replace: true });
+          }, 2000)
         }
       })
       .catch((error) => {

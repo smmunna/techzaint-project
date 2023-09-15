@@ -6,7 +6,7 @@ import Axios from "../../../axios/Axios"
 import Swal from "sweetalert2";
 
 const AddCourses = () => {
-    const [categoryChange, setCategoryChange] = useState()
+    const [categoryChange, setCategoryChange] = useState('')
     const [ratingChange, setRatingChange] = useState(5)
     const [error, setError] = useState('')
     const [photo, setPhoto] = useState("");
@@ -14,6 +14,10 @@ const AddCourses = () => {
     // styling the input label;
     const p = {
         fontWeight: 'bold'
+    }
+
+    const handleCategoryChange = (e)=>{
+        setCategoryChange(e.target.value)
     }
 
     // photo upload
@@ -66,6 +70,8 @@ const AddCourses = () => {
             content_preview,
             thumbnail
         }
+
+        // console.log(courseInfo)
 
         const formData = new FormData()
         formData.append('title', title)
@@ -127,12 +133,12 @@ const AddCourses = () => {
 
                                 <div>
                                     <p style={p}>Category: </p>
-                                    <select className=" login-input h-12 w-full" value={categoryChange} onChange={(e) => setCategoryChange(e.target.value)}>
-                                        <option disabled>Select Status</option>
-                                        <option value={`Languages`}>Languages</option>
-                                        <option value={`Frontend`}>Frontend</option>
-                                        <option value={`Backend`}>Backend</option>
-                                        <option value={`Web Design`}>Web Design</option>
+                                    <select className=" login-input h-12 w-full" value={categoryChange} onChange={handleCategoryChange}>
+                                        <option>Select Status</option>
+                                        <option value={`languages`}>Languages</option>
+                                        <option value={`frontend`}>Frontend</option>
+                                        <option value={`backend`}>Backend</option>
+                                        <option value={`projects`}>Projects</option>
                                     </select>
                                 </div>
 

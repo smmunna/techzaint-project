@@ -49,7 +49,7 @@ const AuthProvider = ({ children }) => {
       // jwt sign in to the local storage;
       if (currentUser) {
         const loggedUser = { email: currentUser.email }
-        fetch('http://localhost:3000/user/jwt', {
+        fetch('http://localhost:8000/api/login', {
           method: "POST",
           headers: {
             'content-type': 'application/json'
@@ -58,6 +58,7 @@ const AuthProvider = ({ children }) => {
         })
           .then(res => res.json())
           .then(data => {
+            // console.log(data)
             localStorage.setItem('access-token', data.token)
           })
           .catch(error => {

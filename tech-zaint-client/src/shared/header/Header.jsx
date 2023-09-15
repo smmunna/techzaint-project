@@ -10,6 +10,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { darkContext } from "../../context/darkmode/DarkContext";
 import { AuthContext } from "../../provider/AuthProvider";
 import Axios from "../../axios/Axios";
+import AxiosSecure from "../../axios/AxiosSecure";
 
 const Header = () => {
   const [menuIcon, setMenuicon] = useState(false);
@@ -17,15 +18,49 @@ const Header = () => {
   const { user, logOut } = useContext(AuthContext);
   const dropdownRef = useRef(null);
   const [userdata, setUserdata] = useState([])
+  const [photopath, setPhotopath] = useState([])
   const navigate = useNavigate()
 
   useEffect(() => {
-    Axios.get(`/user/user-info?email=${user?.email}`)
-      .then(res => {
-        setUserdata(res.data)
-        // console.log(res.data)
+    const accessToken = localStorage.getItem('access-token');
+
+    // Define the headers object with the Authorization header
+    const headers = {
+      Authorization: `Bearer ${accessToken}`, // Assuming it's a Bearer token
+      'Content-Type': 'application/json',
+      Accept:'application/json'
+       // You can adjust this based on your API requirements
+    };
+
+    // Make the fetch request with the headers
+    fetch(`http://localhost:8000/api/user-details/${user?.email}`, {
+      method: 'GET',
+      headers: headers, // Pass the headers object here
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        setUserdata(result.data);
+        console.log(result)
       })
-  }, [])
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+
+  }, [user])
+
+
+  useEffect(() => {
+    const originalString = userdata?.photo;
+
+    if (originalString) {
+      const modifiedString = originalString.replace('photogallery/', '');
+      setPhotopath(modifiedString);
+    } else {
+      setPhotopath(''); // For example, setting an empty string
+    }
+  }, [user, userdata])
+
+
 
   //Logout
   const handleLogout = () => {
@@ -171,7 +206,7 @@ const Header = () => {
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full">
                   {
-                    user ? <><img src={userdata?.photo} /></> : <><img src={userIcon} /></>
+                    user ? <><img src={`http://localhost:8000/images/${photopath}`} /></> : <><img src={userIcon} /></>
                   }
                 </div>
               </label>
