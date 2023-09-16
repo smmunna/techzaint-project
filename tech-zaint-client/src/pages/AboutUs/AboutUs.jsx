@@ -20,10 +20,10 @@ const AboutUs = () => {
       <AboutusDetail
         img={im1}
         title={`Introducing TechZaint, Your Leading Software Solution Provider,
-            Backed by a 3-Year Legacy`}
+            Backed by a 3 Years Legacy`}
         des={`Imagine an assembly of exceptional engineers handpicked from across
             the nation, uniting their expertise under one banner – that's us!
-            With a remarkable 3-year journey, we embody a fusion of seasoned
+            With a remarkable 3 years journey, we embody a fusion of seasoned
             experience and a fervent commitment to delivering the finest and
             uncomplicated business solutions. TechZaint doesn't merely lean on
             years of expertise, we embrace the dynamic power of youthful

@@ -15,6 +15,7 @@ import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
 import DashboardHome from "../pages/Dashboard/Home/Home"
 import AddCourses from "../pages/Dashboard/AddCourses/AddCourses";
 import CourseList from "../pages/Dashboard/CourseList/CourseList";
+import Payment from "../pages/Payment/Payment";
 
 const router = createBrowserRouter([
     {
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
                 path: "/profile",
                 element: <PrivateRoutes><Profile /></PrivateRoutes>
             },
+            {
+                path: "/payment/:id",
+                element: <PrivateRoutes><Payment /></PrivateRoutes>
+            },
 
 
         ]
@@ -63,12 +68,12 @@ const router = createBrowserRouter([
                 element: <PrivateRoutes><DashboardHome /></PrivateRoutes>
             },
             {
-                path:'add-courses',
-                element:<PrivateRoutes><AddCourses/></PrivateRoutes>
+                path: 'add-courses',
+                element: <PrivateRoutes><AddCourses /></PrivateRoutes>
             },
             {
-                path:'course-list',
-                element:<PrivateRoutes><CourseList/></PrivateRoutes>
+                path: 'course-list',
+                element: <PrivateRoutes><CourseList /></PrivateRoutes>
             }
         ]
     },

@@ -25,7 +25,7 @@ const Header = () => {
     const headers = {
       Authorization: `Bearer ${accessToken}`, // Assuming it's a Bearer token
       'Content-Type': 'application/json',
-      Accept:'application/json'
+      Accept: 'application/json'
     };
 
     // Make the fetch request with the headers
@@ -95,12 +95,6 @@ const Header = () => {
       </li>
       <li className="relative services">
         <Link to="/services">Services</Link>
-      </li>
-      <li>
-        <Link to="/learn-languages">Products</Link>
-      </li>
-      <li>
-        <Link to="/courses">Courses</Link>
       </li>
       <li>
         <Link to="/about">About</Link>
@@ -179,7 +173,7 @@ const Header = () => {
                     }`}
                 >
                   <img src={cartIcon} width={30} alt="" />
-                  <span className="badge badge-sm indicator-item">8+</span>
+                  <span className="badge badge-sm indicator-item">0+</span>
                 </div>
               </label>
               <div
@@ -188,8 +182,8 @@ const Header = () => {
                   } shadow`}
               >
                 <div className="card-body">
-                  <span className="font-bold text-lg">8 Items</span>
-                  <span className="text-info">Subtotal: $999</span>
+                  <span className="font-bold text-lg">0 Items</span>
+                  <span className="text-info">Subtotal: $0</span>
                   <div className="card-actions">
                     <button className="btn btn-primary btn-block">
                       View cart
@@ -201,6 +195,7 @@ const Header = () => {
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full">
+                  {/* TODO: Change with live path */}
                   {
                     user ? <><img src={`http://localhost:8000/images/${photopath}`} /></> : <><img src={userIcon} /></>
                   }

@@ -14,9 +14,10 @@ const CourseList = () => {
 
     const fetchCourseData = () => {
         axios
-            .get(`http://localhost:8000/api/course`)
+            .get(`http://localhost:8000/api/course`) //TODO: change Here with live site;
             .then((res) => {
                 setCourses(res.data.course);
+
             })
             .catch((err) => {
                 console.log(err.message);
@@ -65,7 +66,7 @@ const CourseList = () => {
 
     // Getting course by their Id;
     const handleGetCourse = (id) => {
-        axios.get(`http://localhost:8000/api/course/${id}`)
+        axios.get(`http://localhost:8000/api/course/${id}`)  //TODO: change Here with live site;
             .then(res => {
                 setOneCourse(res.data.course)
             })
@@ -99,7 +100,7 @@ const CourseList = () => {
             content_preview
         }
 
-        axios.put(`http://localhost:8000/api/update-course/${id}`, courseData)
+        axios.put(`http://localhost:8000/api/update-course/${id}`, courseData)  //TODO: change Here with live site;
             .then(res => {
 
                 if (res.data.status == 'ok') {
@@ -110,6 +111,7 @@ const CourseList = () => {
                         showConfirmButton: false,
                         timer: 1500,
                     });
+                    form.reset()
                     fetchCourseData();
                 }
 
@@ -119,12 +121,44 @@ const CourseList = () => {
             });
     }
 
+    // Search query;
+    const handleSearchByTitle = (e) =>{
+        e.preventDefault()
+        const form = e.target;
+        const title = form.title.value;
+        
+        axios.get(`http://localhost:8000/api/search-course/${title}`)
+        .then(res=>{
+            setCourses(res.data.course)
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+    }
+
 
     return (
         <div>
             <PageTitle title={`Courses List`} />
             <Cover title={`List of Courses & Projects`} img={img1} />
             <div className="px-0 lg:px-24 pb-12">
+            {/* Search Item */}
+                <div className="my-2">
+                    <div>
+                        <form onSubmit={handleSearchByTitle}>
+                            <div>
+                                <input
+                                    className="input input-bordered input-primary p-2 w-full md:w-[400px]"
+                                    type="text"
+                                    name="title"
+                                    placeholder="Search by title or keep it empty & enter "
+                                />
+                                <button type="submit" className="btn btn-accent ml-2">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
                 <div className="flex justify-center">
                     <div className="w-[350px] md:w-[500px] lg:w-full overflow-x-auto">
                         <table className="table">
@@ -142,7 +176,6 @@ const CourseList = () => {
                                     <th colSpan={2} className="text-center">Action</th>
                                 </tr>
                             </thead>
-
                             <tbody>
                                 {
                                     courses.map((course, index) => <React.Fragment key={index + 1}>
@@ -162,7 +195,6 @@ const CourseList = () => {
                                         </tr>
                                     </React.Fragment>)
                                 }
-
                             </tbody>
                         </table>
                     </div>
