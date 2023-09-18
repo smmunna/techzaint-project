@@ -4,7 +4,6 @@ import Cover from "../../components/Cover/Cover";
 import img1 from "../../assets/cover/cover1.jpg";
 import { AuthContext } from "../../provider/AuthProvider";
 import { darkContext } from "../../context/darkmode/DarkContext"
-import AxiosSecure from "../../axios/AxiosSecure";
 import Spinner1 from "../../components/Spinner/Spinner1";
 
 const Profile = () => {
@@ -27,7 +26,7 @@ const Profile = () => {
     };
 
     // Make the fetch request with the headers
-    fetch(`http://localhost:8000/api/user-details/${user?.email}`, { //TODO: change url with live site;
+    fetch(`${import.meta.env.VITE_LOCAL_SERVER}/user-details/${user?.email}`, { //TODO: change url with live site;
       method: 'GET',
       headers: headers, // Pass the headers object here
     })
@@ -63,57 +62,67 @@ const Profile = () => {
         <Cover title={`Welcome, ${user?.displayName}`} img={img1} />
       </div>
 
+      {!photopath ?
+        <>
+          <div className="py-12">
+            <Spinner1 />
+          </div>
+        </> :
+        <>
+          <div className={`py-20 px-5 md:px-24 flex justify-center ${darkmode ? 'dark' : 'light'}`}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div className="flex justify-center">
+                <div>
+                  {user?.photoURL ? (
+                    <>
+                      <img src={user?.photoURL} className="w-[200px]" alt="" />
+                    </>
+                  ) : (
+                    <>
+                      <img src={`${import.meta.env.VITE_LOCAL_PHOTOURL}/${photopath}`} className="w-[200px]" alt="" />
+                    </>
+                  )}
+                </div>
+              </div>
 
-      <div className={`py-20 px-5 md:px-24 flex justify-center ${darkmode ? 'dark' : 'light'}`}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <div className="flex justify-center">
-            <div>
-              {user?.photoURL ? (
-                <>
-                  <img src={user?.photoURL} className="w-[200px]" alt="" />
-                </>
-              ) : (
-                <>
-                  <img src={`http://localhost:8000/images/${photopath}`} className="w-[200px]" alt="" />
-                </>
-              )}
+
+              <div>
+                <div className=" border-b-2">
+                  {user?.displayName && (
+                    <>
+                      <h3 className="text-2xl font-bold">{user?.displayName}</h3>
+                    </>
+                  )}
+                </div>
+                <div className=" border-b-2 pt-2">
+                  {user?.email && (
+                    <>
+                      <h3><span className="font-bold">Email:</span> {user?.email}</h3>
+                    </>
+                  )}
+                </div>
+                <div className=" border-b-2 pt-2">
+                  <h3><span className="font-bold">Phone:</span> +{userdata?.phone}</h3>
+                </div>
+                <div className=" border-b-2 pt-2">
+                  <h3><span className="font-bold">DOB:</span> {userdata?.dob}</h3>
+                </div>
+                <div className=" border-b-2 pt-2">
+                  <h3><span className="font-bold">Present Address:</span> {userdata?.presentaddress}</h3>
+                </div>
+                <div className=" border-b-2 pt-2">
+                  <h3><span className="font-bold">Permanent Address:</span> {userdata?.permanentaddress}</h3>
+                </div>
+                <div className=" border-b-2 pt-2">
+                  <h3><span className="font-bold">Role:</span> {userdata?.status}</h3>
+                </div>
+              </div>
             </div>
           </div>
+        </>
+      }
 
 
-          <div>
-            <div className=" border-b-2">
-              {user?.displayName && (
-                <>
-                  <h3 className="text-2xl font-bold">{user?.displayName}</h3>
-                </>
-              )}
-            </div>
-            <div className=" border-b-2 pt-2">
-              {user?.email && (
-                <>
-                  <h3><span className="font-bold">Email:</span> {user?.email}</h3>
-                </>
-              )}
-            </div>
-            <div className=" border-b-2 pt-2">
-              <h3><span className="font-bold">Phone:</span> +{userdata?.phone}</h3>
-            </div>
-            <div className=" border-b-2 pt-2">
-              <h3><span className="font-bold">DOB:</span> {userdata?.dob}</h3>
-            </div>
-            <div className=" border-b-2 pt-2">
-              <h3><span className="font-bold">Present Address:</span> {userdata?.presentaddress}</h3>
-            </div>
-            <div className=" border-b-2 pt-2">
-              <h3><span className="font-bold">Permanent Address:</span> {userdata?.permanentaddress}</h3>
-            </div>
-            <div className=" border-b-2 pt-2">
-              <h3><span className="font-bold">Role:</span> {userdata?.status}</h3>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };

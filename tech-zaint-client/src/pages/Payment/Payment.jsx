@@ -4,22 +4,25 @@ import img from "../../assets/banner/banner3.jpg";
 import bkashImg from "../../assets/icons/bkash.png";
 import bkashImg1 from "../../assets/icons/bkash1.png";
 import Cover from '../../components/Cover/Cover';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../provider/AuthProvider';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { darkContext } from '../../context/darkmode/DarkContext';
+import Spinner1 from "../../components/Spinner/Spinner1";
+import Swal from 'sweetalert2';
 
 const Payment = () => {
     const [oneCourse, setOneCourse] = useState([])
     const { user } = useContext(AuthContext)
     const { id } = useParams()
     const { darkmode } = useContext(darkContext)
+    const navigate = useNavigate()
 
     useEffect(() => {
-        axios.get(`http://localhost:8000/api/course/${id}`)
+        axios.get(`${import.meta.env.VITE_LOCAL_SERVER}/course/${id}`) //TODO: change with live site
             .then(res => {
                 setOneCourse(res.data.course)
                 // console.log(res.data.course)
@@ -41,6 +44,9 @@ const Payment = () => {
         const course_id = form.course_id.value;
         const transaction_id = form.transaction_id.value;
         const price = form.price.value;
+        const title = form.title.value;
+        const random5DigitNumber = Math.floor(10000 + Math.random() * 90000);
+        const invoice_no = random5DigitNumber;
 
         const paymentInfo = {
             name,
@@ -50,9 +56,31 @@ const Payment = () => {
             comments,
             course_id,
             transaction_id,
-            price
+            price,
+            title,
+            invoice_no
         }
-        console.log(paymentInfo)
+
+        // Send payment data;
+        axios.post(`${import.meta.env.VITE_LOCAL_SERVER}/payment`, paymentInfo)  //TODO: change with live site
+            .then(res => {
+                if (res.data.status == 'ok') {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Payment successfull, wait for confirmation',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    form.reset()
+                    setTimeout(() => {
+                        navigate('/services') //TODO: change to Order summary
+                    }, 1500)
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     return (
@@ -118,7 +146,6 @@ const Payment = () => {
                             </div>
                             {/* Right Div */}
                             <div>
-
                                 <div className='space-y-2 pt-4'>
                                     <input
                                         className="login-input p-2 w-full md:w-[400px]"
@@ -130,16 +157,29 @@ const Payment = () => {
                                     <input
                                         className="login-input p-2 w-full md:w-[400px]"
                                         type="text"
+                                        name="title"
+                                        defaultValue={oneCourse.title}
+                                        hidden
+                                    />
+                                    <input
+                                        className="login-input p-2 w-full md:w-[400px]"
+                                        type="text"
                                         name="price"
                                         defaultValue={oneCourse.price}
                                         hidden
                                     />
-                                    <div>
-                                        <h3 className='text-2xl font-bold'>Title: <span className='text-red-500'>{oneCourse.title}</span></h3>
-                                    </div>
-                                    <div>
-                                        <h3 className='text-2xl font-bold'>Price: <span className='text-green-500'>{oneCourse.price} BDT</span></h3>
-                                    </div>
+
+                                    {!oneCourse.id ? <><Spinner1 /></> :
+                                        <>
+                                            <div>
+                                                <h3 className='text-2xl font-bold'>Title: <span className='text-red-500'>{oneCourse.title}</span></h3>
+                                            </div>
+                                            <div>
+                                                <h3 className='text-2xl font-bold'>Price: <span className='text-green-500'>{oneCourse.price} BDT</span></h3>
+                                            </div>
+                                        </>
+                                    }
+
                                     {/* Bkash Payment */}
 
                                     <div className='border-2 border-slate-200 p-4'>

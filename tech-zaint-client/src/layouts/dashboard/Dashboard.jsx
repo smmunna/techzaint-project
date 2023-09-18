@@ -18,7 +18,7 @@ const Dashboard = () => {
             Accept: 'application/json'
         };
 
-        axios.get(`http://localhost:8000/api/role/${user.email}`,{ //TODO: change url with live site;
+        axios.get(`${import.meta.env.VITE_LOCAL_SERVER}/role/${user.email}`,{ //TODO: change url with live site;
             headers:headers
         })
             .then(res => {
@@ -68,9 +68,9 @@ const Dashboard = () => {
                                     <ActivityList name={`Dashboard Home`} link={`/dashboard`} />
                                     <ActivityList name={`Add Course`} link={`/dashboard/add-courses`} />
                                     <ActivityList name={`Course List`} link={`/dashboard/course-list`} />
+                                    <ActivityList name={`Orders List`} link={`/dashboard/order-list`} />
                                     <ActivityList name={`Add Project`} link={`/`} />
                                     <ActivityList name={`Users List`} link={`/`} />
-                                    <ActivityList name={`Orders List`} link={`/`} />
                                     <li className='border-b-4 border-b-yellow-400 p-2 bg-red-500 text-yellow-50' onClick={handleLogout}><h3>Logout</h3></li>
                                 </div>
                             </>
@@ -82,7 +82,7 @@ const Dashboard = () => {
                                 <div>
                                     <ActivityList name={`Home`} link={`/`} />
                                     <ActivityList name={`Dashboard Home`} link={`/dashboard`} />
-                                    <ActivityList name={`Order Summary`} link={`/`} />
+                                    <ActivityList name={`Order Summary`} link={`/dashboard/order-summary`} />
                                     <ActivityList name={`View Courses`} link={`/`} />
                                     <ActivityList name={`Send Message`} link={`/`} />
                                     <li className='border-b-4 border-b-yellow-400 p-2 bg-red-500 text-yellow-50' onClick={handleLogout}><h3>Logout</h3></li>

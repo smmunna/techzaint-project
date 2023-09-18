@@ -16,6 +16,9 @@ import DashboardHome from "../pages/Dashboard/Home/Home"
 import AddCourses from "../pages/Dashboard/AddCourses/AddCourses";
 import CourseList from "../pages/Dashboard/CourseList/CourseList";
 import Payment from "../pages/Payment/Payment";
+import OrderSummary from "../pages/Dashboard/OrderSummary/OrderSummary";
+import Invoice from "../pages/Dashboard/OrderSummary/Invoice";
+import OrderList from "../pages/Dashboard/OrderList/OrderList";
 
 const router = createBrowserRouter([
     {
@@ -74,7 +77,19 @@ const router = createBrowserRouter([
             {
                 path: 'course-list',
                 element: <PrivateRoutes><CourseList /></PrivateRoutes>
-            }
+            },
+            {
+                path: 'order-summary',
+                element: <PrivateRoutes><OrderSummary /></PrivateRoutes>
+            },
+            {
+                path: 'invoice/:id',
+                element: <PrivateRoutes><Invoice /></PrivateRoutes>
+            },
+            {
+                path: 'order-list',
+                element: <PrivateRoutes><OrderList /></PrivateRoutes>
+            },
         ]
     },
     {

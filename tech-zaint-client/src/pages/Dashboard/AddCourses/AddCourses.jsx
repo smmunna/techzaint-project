@@ -86,7 +86,7 @@ const AddCourses = () => {
         formData.append('content_preview', content_preview)
         formData.append('thumbnail', thumbnail)
 
-        fetch('http://localhost:8000/api/add-course', { //TODO: change url with live site;
+        fetch(`${import.meta.env.VITE_LOCAL_SERVER}/add-course`, { //TODO: change url with live site;
             method: 'POST',
             body: formData
         })
