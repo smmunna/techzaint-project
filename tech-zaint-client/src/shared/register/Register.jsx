@@ -118,7 +118,7 @@ const Register = () => {
         if (user) {
           updateUser(user, name)
             .then(() => {
-              fetch(`${import.meta.env.VITE_LOCAL_SERVER}/register`, {
+              fetch(`https://app1.techzaint.com/api/register`, {
                 method: "POST",
                 body: formData, // Use the FormData object as the body
               })

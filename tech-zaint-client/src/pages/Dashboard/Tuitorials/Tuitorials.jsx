@@ -11,7 +11,7 @@ const Tuitorials = () => {
     const { id } = useParams()
 
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_LOCAL_SERVER}/get-tuitorial/${id}`,{
+        axios.get(`https://app1.techzaint.com/api/get-tuitorial/${id}`,{
             headers:{
                 Authorization: `Bearer ${localStorage.getItem('access-token')}`
             }

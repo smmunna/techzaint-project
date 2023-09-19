@@ -49,7 +49,7 @@ const AuthProvider = ({ children }) => {
       // jwt sign in to the local storage;
       if (currentUser) {
         const loggedUser = { email: currentUser.email }
-        fetch(`${import.meta.env.VITE_LOCAL_SERVER}/login`, {
+        fetch(`https://app1.techzaint.com/api/login`, {
           method: "POST",
           headers: {
             'content-type': 'application/json'

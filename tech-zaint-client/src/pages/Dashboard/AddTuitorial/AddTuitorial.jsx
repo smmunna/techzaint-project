@@ -11,7 +11,7 @@ const AddTuitorial = () => {
     const [courseIdChange, setCourseIdChange] = useState('')
 
     const getCourses = () => {
-        axios.get(`${import.meta.env.VITE_LOCAL_SERVER}/course`)  //TODO: change here with live site;
+        axios.get(`https://app1.techzaint.com/api/course`)  //TODO: change here with live site;
             .then(res => {
                 setCourseList(res.data.course)
             })
@@ -39,7 +39,7 @@ const AddTuitorial = () => {
             description
         }
         // console.log(tuitorial)
-        axios.post(`${import.meta.env.VITE_LOCAL_SERVER}/add-tuitorial`,tuitorial)  //TODO: change Here with live site;
+        axios.post(`https://app1.techzaint.com/api/add-tuitorial`,tuitorial)  //TODO: change Here with live site;
         .then(res=>{
             if(res.data.status == 'ok'){
                 Swal.fire({

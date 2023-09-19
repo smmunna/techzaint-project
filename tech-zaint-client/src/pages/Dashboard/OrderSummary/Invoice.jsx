@@ -21,7 +21,7 @@ const Invoice = () => {
     });
 
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_LOCAL_SERVER}/invoice-item/${id}`, {
+        axios.get(`https://app1.techzaint.com/api/invoice-item/${id}`, {
             headers: {
                 Authorization: `Bearer ${accessToken}`
             },

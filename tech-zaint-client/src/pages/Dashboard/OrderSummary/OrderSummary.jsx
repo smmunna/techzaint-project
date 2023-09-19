@@ -21,7 +21,7 @@ const OrderSummary = () => {
     };
 
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_LOCAL_SERVER}/payment-info/${user.email}`, {
+        axios.get(`https://app1.techzaint.com/api/payment-info/${user.email}`, {
             headers: headers
         })
             .then(res => {

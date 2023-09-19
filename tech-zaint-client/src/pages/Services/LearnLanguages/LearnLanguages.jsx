@@ -16,7 +16,7 @@ const LearnLanguages = () => {
   const { darkmode } = useContext(darkContext);
 
   useEffect(() => {
-    axios.get(`${import.meta.env.VITE_LOCAL_SERVER}/course`)  //TODO: change url with live site;
+    axios.get(`https://app1.techzaint.com/api/course`)  //TODO: change url with live site;
       .then((res) => {
         setLanguages(res.data.course)
         // console.log(res.data.course)

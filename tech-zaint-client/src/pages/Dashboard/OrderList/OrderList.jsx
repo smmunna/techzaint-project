@@ -17,7 +17,7 @@ const OrderList = () => {
     const [orderId, setOrderId] = useState('')
 
     const getOrderList = () => {
-        axios.get(`${import.meta.env.VITE_LOCAL_SERVER}/order-list`, {
+        axios.get(`https://app1.techzaint.com/api/order-list`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('access-token')}`
             }
@@ -36,7 +36,7 @@ const OrderList = () => {
 
     // getting orderlist by id;
     const orderListByIdModal = (id) => {
-        axios.get(`${import.meta.env.VITE_LOCAL_SERVER}/order-list/${id}`, {
+        axios.get(`https://app1.techzaint.com/api/order-list/${id}`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('access-token')}`
             }
@@ -62,7 +62,7 @@ const OrderList = () => {
             status: statusChange
         }
 
-        axios.put(`${import.meta.env.VITE_LOCAL_SERVER}/order-status/${orderId}`, status)
+        axios.put(`https://app1.techzaint.com/api/order-status/${orderId}`, status)
             .then(res => {
                 if (res.data.status == 'ok') {
                     Swal.fire({

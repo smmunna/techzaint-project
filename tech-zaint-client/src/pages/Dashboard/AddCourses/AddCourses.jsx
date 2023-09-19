@@ -86,7 +86,7 @@ const AddCourses = () => {
         formData.append('content_preview', content_preview)
         formData.append('thumbnail', thumbnail)
 
-        fetch(`${import.meta.env.VITE_LOCAL_SERVER}/add-course`, { //TODO: change url with live site;
+        fetch(`https://app1.techzaint.com/api/add-course`, { //TODO: change url with live site;
             method: 'POST',
             body: formData
         })

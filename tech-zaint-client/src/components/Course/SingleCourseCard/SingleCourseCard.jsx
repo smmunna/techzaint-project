@@ -2,7 +2,6 @@ import { useParams } from "react-router-dom";
 import Cover from "../../Cover/Cover";
 import PageTitle from "../../PageTitle/PageTitle";
 import { useContext, useEffect, useState } from "react";
-import Axios from "../../../axios/Axios";
 import SingleCourseDetailsLeft from "./SingleCourseDetailsLeft";
 import SingleCourseCardRight from "./SingleCourseCardRight";
 import img from "../../../assets/cover/cover1.jpg";
@@ -14,7 +13,7 @@ const SingleCourseCard = () => {
   const { darkmode } = useContext(darkContext)
   const { id } = useParams();
   useEffect(() => {
-    axios.get(`${import.meta.env.VITE_LOCAL_SERVER}/course/${id}`).then((res) => { //TODO: change url with live site;
+    axios.get(`https://app1.techzaint.com/api/course/${id}`).then((res) => { //TODO: change url with live site;
       setSingleCourse(res.data.course)
       // console.log(res.data.course)
     });

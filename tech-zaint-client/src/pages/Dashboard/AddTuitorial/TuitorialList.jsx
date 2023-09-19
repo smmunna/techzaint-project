@@ -14,7 +14,7 @@ const TuitorialList = () => {
     const [updateId, setupdateId] = useState('');
 
     const getTuitorial = () => {
-        axios.get(`${import.meta.env.VITE_LOCAL_SERVER}/tuitorial`, {  //TODO: change here with live site;
+        axios.get(`https://app1.techzaint.com/api/tuitorial`, {  //TODO: change here with live site;
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('access-token')}`
             }
@@ -34,7 +34,7 @@ const TuitorialList = () => {
 
     const handleUpdateTuitorial = (id) => {
         // console.log(id)
-        axios.get(`${import.meta.env.VITE_LOCAL_SERVER}/tuitorial/${id}`) //TODO: change here with live
+        axios.get(`https://app1.techzaint.com/api/tuitorial/${id}`) //TODO: change here with live
             .then(res => {
                 setNewTuitorial(res.data)
                 setupdateId(res.data.id)
@@ -68,7 +68,7 @@ const TuitorialList = () => {
             description
         }
         //console.log(updateInfo)
-        axios.put(`${import.meta.env.VITE_LOCAL_SERVER}/update-tuitorial/${id}`, updateInfo) //TODO: change here with live site;
+        axios.put(`https://app1.techzaint.com/api/update-tuitorial/${id}`, updateInfo) //TODO: change here with live site;
             .then(res => {
                 // console.log(res.data)
                 if (res.data.status == 'ok') {
@@ -100,7 +100,7 @@ const TuitorialList = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`${import.meta.env.VITE_LOCAL_SERVER}/delete-tuitorial/${id}`) //TODO: chage with live site;
+                axios.delete(`https://app1.techzaint.com/api/delete-tuitorial/${id}`) //TODO: chage with live site;
                     .then(res => {
                         if (res.data.status == 'deleted') {
                             Swal.fire({
