@@ -88,7 +88,7 @@ const OrderList = () => {
             <Cover title={`Check Order List`} img={img} />
 
 
-            <div className={`px-0 lg:px-24`}>
+            <div className={`px-0 lg:px-24 pb-12`}>
                 <div className="flex justify-center">
 
                     {

@@ -3,14 +3,15 @@ import Footer from "../../shared/footer/Footer";
 import Header from "../../shared/header/Header";
 import { useContext } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
+import loadingGif from "../../assets/animation/loading.gif"
 
 const Main = () => {
     const { user, loading } = useContext(AuthContext)
     if (!user && loading) {
         return <div>
-            <div className="text-center py-24">
+            <div className="flex justify-center py-52">
                 <div>
-                    <span className="loading loading-spinner h-16 w-16 text-secondary"></span>
+                    <img src={loadingGif} className='w-[150px]' alt="" />
                 </div>
             </div>
         </div>

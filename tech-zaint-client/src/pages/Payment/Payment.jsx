@@ -13,6 +13,7 @@ import axios from 'axios';
 import { darkContext } from '../../context/darkmode/DarkContext';
 import Spinner1 from "../../components/Spinner/Spinner1";
 import Swal from 'sweetalert2';
+import PaymentInstructionModal from '../../components/PaymentInstructionModal/PaymentInstructionModal';
 
 const Payment = () => {
     const [oneCourse, setOneCourse] = useState([])
@@ -179,6 +180,13 @@ const Payment = () => {
                                             </div>
                                         </>
                                     }
+
+                                    <div className='py-2'>
+                                        <h3>How to pay throught Bkash ? <a className='link-primary underline cursor-pointer' onClick={() => document.getElementById('my_modal_1').showModal()}>Follow Instruction</a></h3>
+                                    </div>
+
+                                    {/* Modal */}
+                                    <PaymentInstructionModal />
 
                                     {/* Bkash Payment */}
 

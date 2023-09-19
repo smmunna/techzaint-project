@@ -2,6 +2,7 @@ import { useContext } from "react";
 import "./Footer.css";
 import { darkContext } from "../../context/darkmode/DarkContext";
 import footerLogo from "../../assets/brand/brand.png";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const { darkmode } = useContext(darkContext);
@@ -37,8 +38,8 @@ const Footer = () => {
         </div>
         <div>
           <span className="footer-title">Company</span>
-          <a className="link link-hover">About us</a>
-          <a className="link link-hover">Contact</a>
+          <a className="link link-hover"><Link to="/about">About us</Link></a>
+          <a className="link link-hover"><Link to="/contact">Contact</Link></a>
           <a className="link link-hover">Career</a>
           <a className="link link-hover">Press kit</a>
         </div>
@@ -63,7 +64,7 @@ const Footer = () => {
           </div>
           <p className="leading-[2]">
             <span className="text-2xl">TechZaint Ltd.</span> <br />
-            Providing reliable tech💗, Since 2022 - {year} &copy;
+            Providing reliable tech💗, Since 2020 - {year} &copy;
           </p>
         </div>
         <div className="md:place-self-center md:justify-self-end">

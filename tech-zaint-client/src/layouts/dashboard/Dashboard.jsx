@@ -4,6 +4,7 @@ import { AuthContext } from '../../provider/AuthProvider';
 import ActivityList from '../../components/Dashboard/ActivityList/ActivityList';
 import Open from "../../assets/icons/open.png";
 import axios from 'axios';
+import Footer from "../../shared/footer/Footer"
 
 const Dashboard = () => {
     const { user, logOut } = useContext(AuthContext)
@@ -47,6 +48,7 @@ const Dashboard = () => {
                 <div className="drawer-content">
                     {/* Page content here */}
                     <Outlet />
+                    <Footer/>
                     <label htmlFor="my-drawer" className="btn btn-accent drawer-button absolute top-5 left-5">Open <img src={Open} width={30} alt="" /></label>
                 </div>
                 <div className="drawer-side">
@@ -69,8 +71,8 @@ const Dashboard = () => {
                                     <ActivityList name={`Add Course`} link={`/dashboard/add-courses`} />
                                     <ActivityList name={`Course List`} link={`/dashboard/course-list`} />
                                     <ActivityList name={`Orders List`} link={`/dashboard/order-list`} />
-                                    <ActivityList name={`Add Project`} link={`/`} />
-                                    <ActivityList name={`Users List`} link={`/`} />
+                                    <ActivityList name={`Add Tuitorial`} link={`/dashboard/add-tuitorial`} />
+                                    <ActivityList name={`Tuitorial List`} link={`/dashboard/tuitorial-list`} />
                                     <li className='border-b-4 border-b-yellow-400 p-2 bg-red-500 text-yellow-50' onClick={handleLogout}><h3>Logout</h3></li>
                                 </div>
                             </>
@@ -83,8 +85,7 @@ const Dashboard = () => {
                                     <ActivityList name={`Home`} link={`/`} />
                                     <ActivityList name={`Dashboard Home`} link={`/dashboard`} />
                                     <ActivityList name={`Order Summary`} link={`/dashboard/order-summary`} />
-                                    <ActivityList name={`View Courses`} link={`/`} />
-                                    <ActivityList name={`Send Message`} link={`/`} />
+                                    <ActivityList name={`Send Message`} link={`/dashboard/send-message`} />
                                     <li className='border-b-4 border-b-yellow-400 p-2 bg-red-500 text-yellow-50' onClick={handleLogout}><h3>Logout</h3></li>
                                 </div>
                             </>

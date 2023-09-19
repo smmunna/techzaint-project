@@ -39,7 +39,7 @@ const OrderSummary = () => {
             <PageTitle title={`Order Summary`} />
             <Cover title={`Your Oder Summary`} img={img} />
 
-            <div className='px-0 lg:px-24'>
+            <div className='px-0 lg:px-24 pb-12 light1'>
                 <div className="flex justify-center">
 
                     {
@@ -76,7 +76,7 @@ const OrderSummary = () => {
                                                             <td>{payment.phone}</td>
                                                             <td>{payment.name}</td>
                                                             <td>{payment.price}</td>
-                                                            <td>{payment.status == 'pending' ? <><span className='text-lg font-bold text-red-500'>Pending</span></> : <><Link><button className='btn btn-accent'>View Tuitorial</button></Link></>}</td>
+                                                            <td>{payment.status == 'pending' ? <><span className='text-lg font-bold text-red-500'>Pending</span></> : <><Link to={`/dashboard/enrolled-item/${payment.course_id}`}><button className='btn btn-accent'>View Tuitorial</button></Link></>}</td>
                                                             <td>
                                                                 <Link to={`/dashboard/invoice/${payment.invoice_no}`}>
                                                                     <button className='btn btn-square w-52'>

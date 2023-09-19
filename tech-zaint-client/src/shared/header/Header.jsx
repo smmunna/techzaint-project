@@ -218,9 +218,6 @@ const Header = () => {
                       <Link to="/dashboard">Dashboard</Link>
                     </li>
                     <li>
-                      <Link to="#">Settings</Link>
-                    </li>
-                    <li>
                       <Link onClick={handleLogout}>Logout</Link>
                     </li>
                   </>

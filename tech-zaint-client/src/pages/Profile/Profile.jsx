@@ -64,7 +64,7 @@ const Profile = () => {
 
       {!photopath ?
         <>
-          <div className="py-12">
+          <div className="flex justify-center py-12">
             <Spinner1 />
           </div>
         </> :

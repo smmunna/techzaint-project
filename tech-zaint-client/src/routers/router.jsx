@@ -19,6 +19,10 @@ import Payment from "../pages/Payment/Payment";
 import OrderSummary from "../pages/Dashboard/OrderSummary/OrderSummary";
 import Invoice from "../pages/Dashboard/OrderSummary/Invoice";
 import OrderList from "../pages/Dashboard/OrderList/OrderList";
+import Tuitorials from "../pages/Dashboard/Tuitorials/Tuitorials";
+import SendMessage from "../pages/Dashboard/SendMessage/SendMessage";
+import AddTuitorial from "../pages/Dashboard/AddTuitorial/AddTuitorial";
+import TuitorialList from "../pages/Dashboard/AddTuitorial/TuitorialList";
 
 const router = createBrowserRouter([
     {
@@ -89,6 +93,22 @@ const router = createBrowserRouter([
             {
                 path: 'order-list',
                 element: <PrivateRoutes><OrderList /></PrivateRoutes>
+            },
+            {
+                path: 'enrolled-item/:id',
+                element: <PrivateRoutes><Tuitorials /></PrivateRoutes>
+            },
+            {
+                path: 'send-message',
+                element: <PrivateRoutes><SendMessage /></PrivateRoutes>
+            },
+            {
+                path: 'add-tuitorial',
+                element: <PrivateRoutes><AddTuitorial /></PrivateRoutes>
+            },
+            {
+                path: 'tuitorial-list',
+                element: <PrivateRoutes><TuitorialList /></PrivateRoutes>
             },
         ]
     },
