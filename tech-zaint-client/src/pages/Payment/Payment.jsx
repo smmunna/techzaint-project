@@ -105,7 +105,7 @@ const Payment = () => {
                                     />
                                 </div>
                                 <div>
-                                    <p>optional_email: </p>
+                                    <p>Email: </p>
                                     <input
                                         className="login-input p-2 w-full md:w-[400px]"
                                         type="text"

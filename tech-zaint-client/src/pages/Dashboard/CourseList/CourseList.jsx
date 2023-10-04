@@ -157,7 +157,7 @@ const CourseList = () => {
                         {
                             courses.length > 0 ?
                                 <>
-                                    <div className="px-0 lg:px-24 pb-12">
+                                    <div className="px-5 lg:px-24 pb-12">
                                         {/* Search Item */}
                                         <div className="my-2">
                                             <div>
@@ -169,7 +169,7 @@ const CourseList = () => {
                                                             name="title"
                                                             placeholder="Search by title or keep it empty & enter "
                                                         />
-                                                        <button type="submit" className="btn btn-accent ml-2">Search</button>
+                                                        <button type="submit" className="btn btn-accent mt-2">Search</button>
                                                     </div>
                                                 </form>
                                             </div>

@@ -23,6 +23,7 @@ import Tuitorials from "../pages/Dashboard/Tuitorials/Tuitorials";
 import SendMessage from "../pages/Dashboard/SendMessage/SendMessage";
 import AddTuitorial from "../pages/Dashboard/AddTuitorial/AddTuitorial";
 import TuitorialList from "../pages/Dashboard/AddTuitorial/TuitorialList";
+import TermsCondition from "../pages/TermsCondition/TermsCondition";
 
 const router = createBrowserRouter([
     {
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
             {
                 path: "/learn-languages/:id",
                 element: <SingleCourseCard />
+            },
+            {
+                path: "/terms-condition",
+                element: <TermsCondition />
             },
             {
                 path: "/profile",

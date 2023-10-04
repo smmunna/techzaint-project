@@ -5,7 +5,7 @@ import img3 from "../../../assets/icons/time.png";
 import img4 from "../../../assets/icons/notes.png";
 
 const SingleCourseCardRight = ({ singleCourse }) => {
-  const { id,price, demo, total_time, status } = singleCourse
+  const { id, price, demo, total_time, status, category } = singleCourse
   return (
     <div className="py-12 lg:sticky lg:top-20">
       <div className={`space-y-5 border-2  p-4`}>
@@ -18,38 +18,66 @@ const SingleCourseCardRight = ({ singleCourse }) => {
           ></iframe>
         </div>
 
-        <div className=" space-y-2">
-          <div className="flex gap-2 items-center font-semibold text-lg">
-            <div>
-              <img src={img2} width={30} alt="" />
-            </div>
-            <div> {status == 'off' ? <><p className="bg-green-600 p-4 text-white">Free for now..</p></> : <>{price} BDT</>}</div>
-          </div>
-          <div className="flex gap-2 font-semibold text-lg items-center">
-            <div>
-              <img src={img1} width={30} alt="" />
-            </div>
-            <div> 100+ Students</div>
-          </div>
-          <div className="flex gap-2 font-semibold text-lg">
-            <div>
-              <img src={img3} width={30} alt="" />
-            </div>
-            <div> {total_time}</div>
-          </div>
-          <div className="flex gap-2 font-semibold text-lg">
-            <div>
-              <img src={img4} width={30} alt="" />
-            </div>
-            <div> 5 Notes</div>
-          </div>
+        {/* Category wise data show */}
+        {
+          category == 'projects' ?
+            <>
+              <div className=" space-y-2">
+                <div className="flex gap-2 items-center font-semibold text-lg">
+                  <div>
+                    <img src={img2} width={30} alt="" />
+                  </div>
+                  <div> {status == 'off' ? <><p className="bg-green-600 p-4 text-white">Free for now..</p></> : <>{price} BDT</>}</div>
+                </div>
+                <div className="flex gap-2 font-semibold text-lg items-center">
+                  <div>
+                    <img src={img1} width={30} alt="" />
+                  </div>
+                  <div> 20+ Downloads</div>
+                </div>
+                <div className="flex pt-5 font-semibold text-lg justify-center">
+                  <div>
+                    <Link to={`/payment/${id}`}> <button className="btn btn-accent w-52 lg:w-96">Buy Now</button></Link>
+                  </div>
+                </div>
+              </div>
+            </>
+            :
+            <>
+              <div className=" space-y-2">
+                <div className="flex gap-2 items-center font-semibold text-lg">
+                  <div>
+                    <img src={img2} width={30} alt="" />
+                  </div>
+                  <div> {status == 'off' ? <><p className="bg-green-600 p-4 text-white">Free for now..</p></> : <>{price} BDT</>}</div>
+                </div>
+                <div className="flex gap-2 font-semibold text-lg items-center">
+                  <div>
+                    <img src={img1} width={30} alt="" />
+                  </div>
+                  <div> 100+ Students</div>
+                </div>
+                <div className="flex gap-2 font-semibold text-lg">
+                  <div>
+                    <img src={img3} width={30} alt="" />
+                  </div>
+                  <div> {total_time}</div>
+                </div>
+                <div className="flex gap-2 font-semibold text-lg">
+                  <div>
+                    <img src={img4} width={30} alt="" />
+                  </div>
+                  <div> 5 Notes</div>
+                </div>
 
-          <div className="flex pt-5 font-semibold text-lg justify-center">
-            <div>
-            <Link to={`/payment/${id}`}> <button className="btn btn-accent w-52 lg:w-96">Enroll Now</button></Link>
-            </div>
-          </div>
-        </div>
+                <div className="flex pt-5 font-semibold text-lg justify-center">
+                  <div>
+                    <Link to={`/payment/${id}`}> <button className="btn btn-accent w-52 lg:w-96">Enroll Now</button></Link>
+                  </div>
+                </div>
+              </div>
+            </>
+        }
       </div>
     </div>
   );

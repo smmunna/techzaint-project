@@ -62,10 +62,10 @@ const AddTuitorial = () => {
         <div>
             <PageTitle title={`Add Tuitorials`} />
             <Cover title={`Add Details of Tuitorials`} img={img} />
-            <div className="px-2 lg:px-24 py-12">
+            <div className="px-0 lg:px-24 py-12">
                 <div className="flex justify-center">
                     <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-5">
-                        <div className="space-y-2">
+                        <div className="space-y-2 order-2 lg:order-1">
                             <h3 className="font-bold"> Course List</h3>
                             <hr />
                             {
@@ -73,10 +73,12 @@ const AddTuitorial = () => {
                                     <div>
                                         <h3><span className="font-bold">[{index+1}] </span> {course.title}</h3>
                                     </div>
+                                    
                                 </React.Fragment>)
                             }
+                            <hr className="py-2" />
                         </div>
-                        <div>
+                        <div className="order-1 lg:order-2 mb-4 lg:mb-0">
                             <div className="space-y-2">
                                 <h3 className="font-bold">Upload Your Tuitorials</h3>
                                 <hr />

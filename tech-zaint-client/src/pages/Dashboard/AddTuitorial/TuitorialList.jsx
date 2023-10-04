@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PageTitle from "../../../components/PageTitle/PageTitle"
 import Cover from "../../../components/Cover/Cover"
+import img from "../../../assets/banner/banner2.jpg"
 import axios from 'axios';
 import { useEffect } from 'react';
 import Spinner1 from '../../../components/Spinner/Spinner1';
@@ -125,7 +126,7 @@ const TuitorialList = () => {
     return (
         <div>
             <PageTitle title={`Tuitorial List`} />
-            <Cover title={`Tuitorial List`} />
+            <Cover title={`Tuitorial List`} img={img} />
             <div className={`px-0 lg:px-24 pb-12`}>
                 <div className="flex justify-center">
 

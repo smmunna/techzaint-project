@@ -21,7 +21,10 @@ const SingleCourseCard = () => {
   return (
     <div className={`${darkmode ? 'dark' : 'light'}`}>
       <PageTitle title={`Single Course`} />
-      <Cover title={`Course Details`} img={img} />
+      
+      {
+        singleCourse.category == 'projects' ? <><Cover title={`Project Details`} img={img} /></> : <><Cover title={`Course Details`} img={img} /></>
+      }
       <div className="px-5 md:px-24">
         <div className="grid grid-cols-1 order-last  lg:grid-cols-12 lg:order-1 gap-5">
           <div className=" lg:col-span-7">

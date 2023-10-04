@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, ScrollRestoration, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../provider/AuthProvider';
 import ActivityList from '../../components/Dashboard/ActivityList/ActivityList';
 import Open from "../../assets/icons/open.png";
@@ -48,6 +48,7 @@ const Dashboard = () => {
                 <div className="drawer-content">
                     {/* Page content here */}
                     <Outlet />
+                    <ScrollRestoration/>
                     <Footer/>
                     <label htmlFor="my-drawer" className="btn btn-accent drawer-button absolute top-5 left-5">Open <img src={Open} width={30} alt="" /></label>
                 </div>

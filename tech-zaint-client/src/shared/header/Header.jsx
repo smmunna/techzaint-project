@@ -88,6 +88,12 @@ const Header = () => {
     };
   }, [menuIcon]);
 
+  // darkmode Handle;
+  const handleDarkmode = ()=>{
+    setDarkmode(!darkmode)
+    localStorage.setItem('theme',darkmode)
+  }
+
   const navlink = (
     <>
       <li>
@@ -151,7 +157,8 @@ const Header = () => {
         <div className="navbar-end lg:pr-28">
           <div
             className="mr-2 cursor-pointer"
-            onClick={() => setDarkmode(!darkmode)}
+            // onClick={() => setDarkmode(!darkmode)}
+            onClick={()=>handleDarkmode(!darkmode)}
           >
             {darkmode ? (
               <>

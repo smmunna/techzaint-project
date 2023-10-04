@@ -48,7 +48,7 @@ const Services = () => {
     <div>
       <PageTitle title={`Services`} />
       <Cover title={`Explore our Services`} img={img} />
-      <div className={`px-5 lg:px-20 ${darkmode ? 'dark' : 'light'}`}>
+      <div className={`px-5 lg:px-20 ${darkmode ? 'dark' : 'light bgimage'}`}>
         <div>
           <h3 className="text-3xl py-3 font-bold">Course Category</h3>
           <hr />

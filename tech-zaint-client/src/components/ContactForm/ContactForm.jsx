@@ -57,8 +57,9 @@ const ContactForm = () => {
           />
         </div>
         <div className="mt-4">
-            <button className="btn btn-accent w-[150px]">Send</button>
+            <button className="btn btn-accent w-[150px]" disabled>Send</button>
         </div>
+        <p className=" mt-4">** <i>For urgent, send use email: <a className="text-red-500" href="mailto:info@techzaint.com">info@techzaint.com</a></i></p>
       </form>
     </div>
   );

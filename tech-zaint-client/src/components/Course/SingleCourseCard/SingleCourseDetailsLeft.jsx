@@ -7,8 +7,10 @@ import { useEffect } from "react";
 
 const SingleCourseDetailsLeft = ({ singleCourse }) => {
   const { darkmode } = useContext(darkContext);
-  const { title, description, content_preview, instructor } = singleCourse;
+  const { title, description, content_preview, instructor, category } = singleCourse;
   const [mycontentList, setMyContenList] = useState([])
+
+  // console.log(singleCourse)
 
   // We need to check whether string or not other wise we can not split it.
   useEffect(() => {
@@ -32,9 +34,23 @@ const SingleCourseDetailsLeft = ({ singleCourse }) => {
           </p>
         </div>
         <div className="space-y-5">
-          <div>
-            <h3 className="text-2xl font-bold">Instructor</h3>
-          </div>
+          {/* Category wise data show */}
+
+          {
+            category == 'projects' ?
+              <>
+                <div>
+                  <h3 className="text-2xl font-bold">Project Owner</h3>
+                </div>
+              </>
+              :
+              <>
+                <div>
+                  <h3 className="text-2xl font-bold">Instructor</h3>
+                </div>
+              </>
+          }
+
           <div className="flex items-center gap-5">
             <div>
               <img src={profilepic} width={80} alt="" />
@@ -49,7 +65,7 @@ const SingleCourseDetailsLeft = ({ singleCourse }) => {
         {/* Content Preview */}
         <div className="space-y-5">
           <div>
-            <h3 className="text-2xl font-bold">Content Preview</h3>
+            {category == 'projects'?<><h3 className="text-2xl font-bold">Available Feature</h3></>:<><h3 className="text-2xl font-bold">Content Preview</h3></>}
           </div>
           <div>
             <ol start="1" className="space-y-2">

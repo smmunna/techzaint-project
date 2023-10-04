@@ -209,7 +209,7 @@ const Register = () => {
                     <p>Password: </p>
                     <input
                       className="login-input p-2 w-full md:w-[400px]"
-                      type="text"
+                      type="password"
                       name="password"
                       placeholder="Enter your password"
                       required
@@ -220,7 +220,7 @@ const Register = () => {
                     <p>Confirm Password: </p>
                     <input
                       className="login-input p-2 w-full md:w-[400px]"
-                      type="text"
+                      type="password"
                       name="confirmpass"
                       placeholder="Enter your password"
                     />
@@ -351,21 +351,21 @@ const Register = () => {
                 <p className="mb-3 mt-3 text-slate-500 text-sm">
                   People who use our service may have uploaded your contact
                   information to TechZaint.{" "}
-                  <Link to="#" className="link-primary">
+                  <Link to="/terms-condition" className="link-primary">
                     Learn More
                   </Link>
                 </p>
                 <p>
                   By clicking register, you agree to our{" "}
-                  <Link to="#" className="link-primary">
+                  <Link to="/terms-condition" className="link-primary">
                     Terms
                   </Link>
                   ,{" "}
-                  <Link to="#" className="link-primary">
+                  <Link to="/terms-condition" className="link-primary">
                     Privacy Policy
                   </Link>{" "}
                   and{" "}
-                  <Link to="#" className="link-primary">
+                  <Link to="/terms-condition" className="link-primary">
                     Cookies Policy
                   </Link>
                   . <br /> You may receive SMS notifications from us and can opt
