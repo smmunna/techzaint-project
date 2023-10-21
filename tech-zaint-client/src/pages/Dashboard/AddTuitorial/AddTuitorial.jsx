@@ -11,7 +11,7 @@ const AddTuitorial = () => {
     const [courseIdChange, setCourseIdChange] = useState('')
 
     const getCourses = () => {
-        axios.get(`https://app1.techzaint.com/api/course`)  //TODO: change here with live site;
+        axios.get(`http://localhost:8000/api/course`)  //TODO: change here with live site;
             .then(res => {
                 setCourseList(res.data.course)
             })
@@ -39,7 +39,7 @@ const AddTuitorial = () => {
             description
         }
         // console.log(tuitorial)
-        axios.post(`https://app1.techzaint.com/api/add-tuitorial`,tuitorial)  //TODO: change Here with live site;
+        axios.post(`http://localhost:8000/api/add-tuitorial`,tuitorial)  //TODO: change Here with live site;
         .then(res=>{
             if(res.data.status == 'ok'){
                 Swal.fire({

@@ -23,7 +23,7 @@ const Payment = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        axios.get(`https://app1.techzaint.com/api/course/${id}`) //TODO: change with live site
+        axios.get(`http://localhost:8000/api/course/${id}`) //TODO: change with live site
             .then(res => {
                 setOneCourse(res.data.course)
                 // console.log(res.data.course)
@@ -63,7 +63,7 @@ const Payment = () => {
         }
 
         // Send payment data;
-        axios.post(`https://app1.techzaint.com/api/payment`, paymentInfo)  //TODO: change with live site
+        axios.post(`http://localhost:8000/api/payment`, paymentInfo)  //TODO: change with live site
             .then(res => {
                 if (res.data.status == 'ok') {
                     Swal.fire({

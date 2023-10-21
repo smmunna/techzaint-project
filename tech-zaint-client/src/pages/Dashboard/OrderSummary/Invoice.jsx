@@ -21,7 +21,7 @@ const Invoice = () => {
     });
 
     useEffect(() => {
-        axios.get(`https://app1.techzaint.com/api/invoice-item/${id}`, {
+        axios.get(`http://localhost:8000/api/invoice-item/${id}`, {
             headers: {
                 Authorization: `Bearer ${accessToken}`
             },

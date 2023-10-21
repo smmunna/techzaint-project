@@ -29,7 +29,7 @@ const Header = () => {
     };
 
     // Make the fetch request with the headers
-    fetch(`https://app1.techzaint.com/api/user-details/${user?.email}`, { //TODO: change url with live site;
+    fetch(`http://localhost:8000/api/user-details/${user?.email}`, { //TODO: change url with live site;
       method: 'GET',
       headers: headers, // Pass the headers object here
     })
@@ -204,7 +204,7 @@ const Header = () => {
                 <div className="w-10 rounded-full">
                   {/* TODO: Change with live path */}
                   {
-                    user ? <><img src={`https://app1.techzaint.com/laravel/storage/app/photogallery/${photopath}`} /></> : <><img src={userIcon} /></>
+                    user ? <><img src={`http://localhost:8000/laravel/storage/app/photogallery/${photopath}`} /></> : <><img src={userIcon} /></>
                   }
                 </div>
               </label>

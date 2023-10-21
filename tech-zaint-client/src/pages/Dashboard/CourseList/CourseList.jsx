@@ -16,7 +16,7 @@ const CourseList = () => {
 
     const fetchCourseData = () => {
         axios
-            .get(`https://app1.techzaint.com/api/course`) //TODO: change Here with live site;
+            .get(`http://localhost:8000/api/course`) //TODO: change Here with live site;
             .then((res) => {
                 setCourses(res.data.course);
                 setLoaded(true)
@@ -45,7 +45,7 @@ const CourseList = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`https://app1.techzaint.com/api/delete/${id}`) //TODO: chage with live site;
+                axios.delete(`http://localhost:8000/api/delete/${id}`) //TODO: chage with live site;
                     .then(res => {
                         if (res.data.status == 'deleted') {
                             Swal.fire({
@@ -69,7 +69,7 @@ const CourseList = () => {
 
     // Getting course by their Id;
     const handleGetCourse = (id) => {
-        axios.get(`https://app1.techzaint.com/api/course/${id}`)  //TODO: change Here with live site;
+        axios.get(`http://localhost:8000/api/course/${id}`)  //TODO: change Here with live site;
             .then(res => {
                 setOneCourse(res.data.course)
             })
@@ -103,7 +103,7 @@ const CourseList = () => {
             content_preview
         }
 
-        axios.put(`https://app1.techzaint.com/api/update-course/${id}`, courseData)  //TODO: change Here with live site;
+        axios.put(`http://localhost:8000/api/update-course/${id}`, courseData)  //TODO: change Here with live site;
             .then(res => {
 
                 if (res.data.status == 'ok') {
@@ -130,7 +130,7 @@ const CourseList = () => {
         const form = e.target;
         const title = form.title.value;
 
-        axios.get(`https://app1.techzaint.com/api/search-course/${title}`)
+        axios.get(`http://localhost:8000/api/search-course/${title}`)
             .then(res => {
                 setCourses(res.data.course)
             })
@@ -199,7 +199,7 @@ const CourseList = () => {
                                                                     <th>{index + 1}</th>
                                                                     <td>{course?.title}</td>
                                                                     <td>{course?.category}</td>
-                                                                    <td><img className="border-4 border-red-300" src={`https://app1.techzaint.com/laravel/storage/app/photogallery/${course?.thumbnail.replace('photogallery', '')}`} width={80} alt="" /></td> {/* TODO: Change Here with Live site */}
+                                                                    <td><img className="border-4 border-red-300" src={`http://localhost:8000/laravel/storage/app/photogallery/${course?.thumbnail.replace('photogallery', '')}`} width={80} alt="" /></td> {/* TODO: Change Here with Live site */}
                                                                     <td>{course?.price} BDT</td>
                                                                     <td>{course?.discount_price}%</td>
                                                                     <td>{course?.status}</td>

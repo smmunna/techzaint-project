@@ -49,7 +49,7 @@ const AuthProvider = ({ children }) => {
       // jwt sign in to the local storage;
       if (currentUser) {
         const loggedUser = { email: currentUser.email }
-        fetch(`https://app1.techzaint.com/api/login`, {
+        fetch(`http://localhost:8000/api/login`, {
           method: "POST",
           headers: {
             'content-type': 'application/json'

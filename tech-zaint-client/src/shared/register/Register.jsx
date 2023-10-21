@@ -118,7 +118,7 @@ const Register = () => {
         if (user) {
           updateUser(user, name)
             .then(() => {
-              fetch(`https://app1.techzaint.com/api/register`, {
+              fetch(`http://localhost:8000/api/register`, {
                 method: "POST",
                 body: formData, // Use the FormData object as the body
               })

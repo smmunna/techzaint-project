@@ -11,7 +11,7 @@ const CourseCard = ({ course }) => {
     <div>
       <div className={`h-full course__card p-4 space-y-5 ${darkmode ? 'dark' : ''}`}>
         <div className="flex justify-center">
-          <img src={`https://app1.techzaint.com/laravel/storage/app/photogallery/${thumbnail.replace('photogallery','')}`} className="w-[350px] h-[250px]" alt="" />
+          <img src={`http://localhost:8000/laravel/storage/app/photogallery/${thumbnail.replace('photogallery','')}`} className="w-[350px] h-[250px]" alt="" />
         </div>
         <div className="space-y-2">
           <div>

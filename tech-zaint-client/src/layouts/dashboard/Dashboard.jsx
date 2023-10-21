@@ -19,7 +19,7 @@ const Dashboard = () => {
             Accept: 'application/json'
         };
 
-        axios.get(`https://app1.techzaint.com/api/role/${user.email}`,{ //TODO: change url with live site;
+        axios.get(`http://localhost:8000/api/role/${user.email}`,{ //TODO: change url with live site;
             headers:headers
         })
             .then(res => {

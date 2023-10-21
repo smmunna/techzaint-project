@@ -13,7 +13,7 @@ const SingleCourseCard = () => {
   const { darkmode } = useContext(darkContext)
   const { id } = useParams();
   useEffect(() => {
-    axios.get(`https://app1.techzaint.com/api/course/${id}`).then((res) => { //TODO: change url with live site;
+    axios.get(`http://localhost:8000/api/course/${id}`).then((res) => { //TODO: change url with live site;
       setSingleCourse(res.data.course)
       // console.log(res.data.course)
     });

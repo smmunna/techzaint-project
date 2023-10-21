@@ -26,7 +26,7 @@ const Profile = () => {
     };
 
     // Make the fetch request with the headers
-    fetch(`https://app1.techzaint.com/api/user-details/${user?.email}`, { //TODO: change url with live site;
+    fetch(`http://localhost:8000/api/user-details/${user?.email}`, { //TODO: change url with live site;
       method: 'GET',
       headers: headers, // Pass the headers object here
     })
@@ -79,7 +79,7 @@ const Profile = () => {
                     </>
                   ) : (
                     <>
-                      <img src={`https://app1.techzaint.com/laravel/storage/app/photogallery/${photopath}`} className="w-[200px]" alt="" />
+                      <img src={`http://localhost:8000/laravel/storage/app/photogallery/${photopath}`} className="w-[200px]" alt="" />
                     </>
                   )}
                 </div>

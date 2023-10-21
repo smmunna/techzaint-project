@@ -18,7 +18,7 @@ const Services = () => {
   const [projects, setProjects] = useState([]);
   const { darkmode } = useContext(darkContext);
   useEffect(() => {
-    axios.get(`https://app1.techzaint.com/api/course`)
+    axios.get(`http://localhost:8000/api/course`)
       .then((res) => { //TODO: change url with live site;
         setCourses(res.data.course)
       });
